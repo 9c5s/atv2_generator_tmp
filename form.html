@@ -27,6 +27,7 @@
 
       input[type="text"],
       input[type="date"],
+      input[type="time"],
       input[type="file"],
       input[type="submit"] {
         width: 100%;
@@ -60,6 +61,7 @@
 
         input[type="text"],
         input[type="date"],
+        input[type="time"],
         input[type="file"],
         input[type="submit"] {
           padding: 25px;
@@ -74,19 +76,25 @@
   </head>
   <body>
     <form id="userForm" action="ASOBI TICKET.html" method="GET" enctype="multipart/form-data">
-      <label for="lastname">姓:</label>
+      <label for="openingtime">開場時間</label>
+      <input type="time" id="openingtime" name="openingtime" required />
+      <br />
+      <label for="showtime">開演時間</label>
+      <input type="time" id="showtime" name="showtime" required />
+      <br />
+      <label for="lastname">姓</label>
       <input type="text" id="lastname" name="lastname" required />
       <br />
-      <label for="firstname">名:</label>
+      <label for="firstname">名</label>
       <input type="text" id="firstname" name="firstname" required />
       <br />
-      <label for="birthdate">生年月日:</label>
+      <label for="birthdate">生年月日</label>
       <input type="date" id="birthdate" name="birthdate" required />
       <br />
-      <label for="managerNumber">管理番号:</label>
+      <label for="managerNumber">管理番号</label>
       <input type="text" id="managerNumber" name="managerNumber" required />
       <br />
-      <label for="qrCode">QRコード画像:</label>
+      <label for="qrCode">QRコード画像</label>
       <input type="file" id="qrCode" name="qrCode" accept="image/*" required />
       <br />
       <input type="submit" value="反映" />

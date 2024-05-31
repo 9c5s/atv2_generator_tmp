@@ -23,12 +23,16 @@ window.addEventListener("load", () => {
 
 window.onload = () => {
   const urlParams = new URLSearchParams(window.location.search);
+  const openingtime = urlParams.get("openingtime");
+  const showtime = urlParams.get("showtime");
   const lastname = urlParams.get("lastname");
   const firstname = urlParams.get("firstname");
   const birthdate = urlParams.get("birthdate");
   const managerNumber = urlParams.get("managerNumber");
   const qrCode = localStorage.getItem("qrCode");
 
+  document.getElementById("openingtime").textContent = `OPEN ${openingtime}`;
+  document.getElementById("showtime").textContent = `START ${showtime}`;
   document.getElementById("fullName").textContent = `${lastname} ${firstname}`;
   document.getElementById("birthDate").textContent = formatDate(birthdate);
   document.getElementById("managerNumber").textContent = managerNumber;
