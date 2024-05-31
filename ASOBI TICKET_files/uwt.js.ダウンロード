@@ -8,17 +8,10 @@
             (function (t, e) {
               var r;
               if (
-                ("undefined" != typeof window &&
-                  window.crypto &&
-                  (r = window.crypto),
+                ("undefined" != typeof window && window.crypto && (r = window.crypto),
                 "undefined" != typeof self && self.crypto && (r = self.crypto),
-                "undefined" != typeof globalThis &&
-                  globalThis.crypto &&
-                  (r = globalThis.crypto),
-                !r &&
-                  "undefined" != typeof window &&
-                  window.msCrypto &&
-                  (r = window.msCrypto),
+                "undefined" != typeof globalThis && globalThis.crypto && (r = globalThis.crypto),
+                !r && "undefined" != typeof window && window.msCrypto && (r = window.msCrypto),
                 !r && void 0 !== n.g && n.g.crypto && (r = n.g.crypto),
                 !r)
               )
@@ -36,9 +29,7 @@
                         return r.randomBytes(4).readInt32LE();
                       } catch (t) {}
                   }
-                  throw new Error(
-                    "Native crypto module could not be used to get secure random number."
-                  );
+                  throw new Error("Native crypto module could not be used to get secure random number.");
                 },
                 o =
                   Object.create ||
@@ -46,12 +37,7 @@
                     function t() {}
                     return function (e) {
                       var n;
-                      return (
-                        (t.prototype = e),
-                        (n = new t()),
-                        (t.prototype = null),
-                        n
-                      );
+                      return (t.prototype = e), (n = new t()), (t.prototype = null), n;
                     };
                   })(),
                 a = {},
@@ -77,8 +63,7 @@
                   init: function () {},
                   mixIn: function (t) {
                     for (var e in t) t.hasOwnProperty(e) && (this[e] = t[e]);
-                    t.hasOwnProperty("toString") &&
-                      (this.toString = t.toString);
+                    t.hasOwnProperty("toString") && (this.toString = t.toString);
                   },
                   clone: function () {
                     return this.init.prototype.extend(this);
@@ -86,8 +71,7 @@
                 }),
                 s = (c.WordArray = u.extend({
                   init: function (t, e) {
-                    (t = this.words = t || []),
-                      (this.sigBytes = null != e ? e : 4 * t.length);
+                    (t = this.words = t || []), (this.sigBytes = null != e ? e : 4 * t.length);
                   },
                   toString: function (t) {
                     return (t || f).stringify(this);
@@ -102,16 +86,13 @@
                         var a = (n[o >>> 2] >>> (24 - (o % 4) * 8)) & 255;
                         e[(r + o) >>> 2] |= a << (24 - ((r + o) % 4) * 8);
                       }
-                    else
-                      for (var c = 0; c < i; c += 4)
-                        e[(r + c) >>> 2] = n[c >>> 2];
+                    else for (var c = 0; c < i; c += 4) e[(r + c) >>> 2] = n[c >>> 2];
                     return (this.sigBytes += i), this;
                   },
                   clamp: function () {
                     var e = this.words,
                       n = this.sigBytes;
-                    (e[n >>> 2] &= 4294967295 << (32 - (n % 4) * 8)),
-                      (e.length = t.ceil(n / 4));
+                    (e[n >>> 2] &= 4294967295 << (32 - (n % 4) * 8)), (e.length = t.ceil(n / 4));
                   },
                   clone: function () {
                     var t = u.clone.call(this);
@@ -125,31 +106,21 @@
                 l = (a.enc = {}),
                 f = (l.Hex = {
                   stringify: function (t) {
-                    for (
-                      var e = t.words, n = t.sigBytes, r = [], i = 0;
-                      i < n;
-                      i++
-                    ) {
+                    for (var e = t.words, n = t.sigBytes, r = [], i = 0; i < n; i++) {
                       var o = (e[i >>> 2] >>> (24 - (i % 4) * 8)) & 255;
-                      r.push((o >>> 4).toString(16)),
-                        r.push((15 & o).toString(16));
+                      r.push((o >>> 4).toString(16)), r.push((15 & o).toString(16));
                     }
                     return r.join("");
                   },
                   parse: function (t) {
                     for (var e = t.length, n = [], r = 0; r < e; r += 2)
-                      n[r >>> 3] |=
-                        parseInt(t.substr(r, 2), 16) << (24 - (r % 8) * 4);
+                      n[r >>> 3] |= parseInt(t.substr(r, 2), 16) << (24 - (r % 8) * 4);
                     return new s.init(n, e / 2);
                   },
                 }),
                 d = (l.Latin1 = {
                   stringify: function (t) {
-                    for (
-                      var e = t.words, n = t.sigBytes, r = [], i = 0;
-                      i < n;
-                      i++
-                    ) {
+                    for (var e = t.words, n = t.sigBytes, r = [], i = 0; i < n; i++) {
                       var o = (e[i >>> 2] >>> (24 - (i % 4) * 8)) & 255;
                       r.push(String.fromCharCode(o));
                     }
@@ -157,8 +128,7 @@
                   },
                   parse: function (t) {
                     for (var e = t.length, n = [], r = 0; r < e; r++)
-                      n[r >>> 2] |=
-                        (255 & t.charCodeAt(r)) << (24 - (r % 4) * 8);
+                      n[r >>> 2] |= (255 & t.charCodeAt(r)) << (24 - (r % 4) * 8);
                     return new s.init(n, e);
                   },
                 }),
@@ -179,9 +149,7 @@
                     (this._data = new s.init()), (this._nDataBytes = 0);
                   },
                   _append: function (t) {
-                    "string" == typeof t && (t = h.parse(t)),
-                      this._data.concat(t),
-                      (this._nDataBytes += t.sigBytes);
+                    "string" == typeof t && (t = h.parse(t)), this._data.concat(t), (this._nDataBytes += t.sigBytes);
                   },
                   _process: function (e) {
                     var n,
@@ -190,10 +158,7 @@
                       o = r.sigBytes,
                       a = this.blockSize,
                       c = o / (4 * a),
-                      u =
-                        (c = e
-                          ? t.ceil(c)
-                          : t.max((0 | c) - this._minBufferSize, 0)) * a,
+                      u = (c = e ? t.ceil(c) : t.max((0 | c) - this._minBufferSize, 0)) * a,
                       l = t.min(4 * u, o);
                     if (u) {
                       for (var f = 0; f < u; f += a) this._doProcessBlock(i, f);
@@ -253,19 +218,14 @@
               u = [];
             !(function () {
               function e(e) {
-                for (var n = t.sqrt(e), r = 2; r <= n; r++)
-                  if (!(e % r)) return !1;
+                for (var n = t.sqrt(e), r = 2; r <= n; r++) if (!(e % r)) return !1;
                 return !0;
               }
               function n(t) {
                 return (4294967296 * (t - (0 | t))) | 0;
               }
               for (var r = 2, i = 0; i < 64; )
-                e(r) &&
-                  (i < 8 && (c[i] = n(t.pow(r, 0.5))),
-                  (u[i] = n(t.pow(r, 1 / 3))),
-                  i++),
-                  r++;
+                e(r) && (i < 8 && (c[i] = n(t.pow(r, 0.5))), (u[i] = n(t.pow(r, 1 / 3))), i++), r++;
             })();
             var s = [],
               l = (a.SHA256 = o.extend({
@@ -290,38 +250,20 @@
                     if (h < 16) s[h] = 0 | t[e + h];
                     else {
                       var p = s[h - 15],
-                        v =
-                          ((p << 25) | (p >>> 7)) ^
-                          ((p << 14) | (p >>> 18)) ^
-                          (p >>> 3),
+                        v = ((p << 25) | (p >>> 7)) ^ ((p << 14) | (p >>> 18)) ^ (p >>> 3),
                         y = s[h - 2],
-                        _ =
-                          ((y << 15) | (y >>> 17)) ^
-                          ((y << 13) | (y >>> 19)) ^
-                          (y >>> 10);
+                        _ = ((y << 15) | (y >>> 17)) ^ ((y << 13) | (y >>> 19)) ^ (y >>> 10);
                       s[h] = v + s[h - 7] + _ + s[h - 16];
                     }
                     var m = (r & i) ^ (r & o) ^ (i & o),
-                      w =
-                        ((r << 30) | (r >>> 2)) ^
-                        ((r << 19) | (r >>> 13)) ^
-                        ((r << 10) | (r >>> 22)),
+                      w = ((r << 30) | (r >>> 2)) ^ ((r << 19) | (r >>> 13)) ^ ((r << 10) | (r >>> 22)),
                       g =
                         d +
-                        (((c << 26) | (c >>> 6)) ^
-                          ((c << 21) | (c >>> 11)) ^
-                          ((c << 7) | (c >>> 25))) +
+                        (((c << 26) | (c >>> 6)) ^ ((c << 21) | (c >>> 11)) ^ ((c << 7) | (c >>> 25))) +
                         ((c & l) ^ (~c & f)) +
                         u[h] +
                         s[h];
-                    (d = f),
-                      (f = l),
-                      (l = c),
-                      (c = (a + g) | 0),
-                      (a = o),
-                      (o = i),
-                      (i = r),
-                      (r = (g + (w + m)) | 0);
+                    (d = f), (f = l), (l = c), (c = (a + g) | 0), (a = o), (o = i), (i = r), (r = (g + (w + m)) | 0);
                   }
                   (n[0] = (n[0] + r) | 0),
                     (n[1] = (n[1] + i) | 0),
@@ -351,8 +293,7 @@
                   return (t._hash = this._hash.clone()), t;
                 },
               }));
-            (e.SHA256 = o._createHelper(l)),
-              (e.HmacSHA256 = o._createHmacHelper(l));
+            (e.SHA256 = o._createHelper(l)), (e.HmacSHA256 = o._createHmacHelper(l));
           })(Math),
           r.SHA256);
       },
@@ -378,12 +319,7 @@
             return new this(function (e, n) {
               if (!t || void 0 === t.length)
                 return n(
-                  new TypeError(
-                    typeof t +
-                      " " +
-                      t +
-                      " is not iterable(cannot read property Symbol(Symbol.iterator))"
-                  )
+                  new TypeError(typeof t + " " + t + " is not iterable(cannot read property Symbol(Symbol.iterator))")
                 );
               var r = Array.prototype.slice.call(t);
               if (0 === r.length) return e([]);
@@ -398,8 +334,7 @@
                         o(t, e);
                       },
                       function (n) {
-                        (r[t] = { status: "rejected", reason: n }),
-                          0 == --i && e(r);
+                        (r[t] = { status: "rejected", reason: n }), 0 == --i && e(r);
                       }
                     );
                 }
@@ -414,14 +349,9 @@
         }
         function c() {}
         function u(t) {
-          if (!(this instanceof u))
-            throw new TypeError("Promises must be constructed via new");
+          if (!(this instanceof u)) throw new TypeError("Promises must be constructed via new");
           if ("function" != typeof t) throw new TypeError("not a function");
-          (this._state = 0),
-            (this._handled = !1),
-            (this._value = void 0),
-            (this._deferreds = []),
-            p(t, this);
+          (this._state = 0), (this._handled = !1), (this._value = void 0), (this._deferreds = []), p(t, this);
         }
         function s(t, e) {
           for (; 3 === t._state; ) t = t._value;
@@ -443,12 +373,10 @@
         }
         function l(t, e) {
           try {
-            if (e === t)
-              throw new TypeError("A promise cannot be resolved with itself.");
+            if (e === t) throw new TypeError("A promise cannot be resolved with itself.");
             if (e && ("object" == typeof e || "function" == typeof e)) {
               var n = e.then;
-              if (e instanceof u)
-                return (t._state = 3), (t._value = e), void d(t);
+              if (e instanceof u) return (t._state = 3), (t._value = e), void d(t);
               if ("function" == typeof n)
                 return void p(
                   ((r = n),
@@ -474,8 +402,7 @@
             u._immediateFn(function () {
               t._handled || u._unhandledRejectionFn(t._value);
             });
-          for (var e = 0, n = t._deferreds.length; e < n; e++)
-            s(t, t._deferreds[e]);
+          for (var e = 0, n = t._deferreds.length; e < n; e++) s(t, t._deferreds[e]);
           t._deferreds = null;
         }
         function h(t, e, n) {
@@ -509,8 +436,7 @@
           (u.prototype.finally = r),
           (u.all = function (t) {
             return new u(function (e, n) {
-              if (!a(t))
-                return n(new TypeError("Promise.all accepts an array"));
+              if (!a(t)) return n(new TypeError("Promise.all accepts an array"));
               var r = Array.prototype.slice.call(t);
               if (0 === r.length) return e([]);
               var i = r.length;
@@ -550,10 +476,8 @@
           }),
           (u.race = function (t) {
             return new u(function (e, n) {
-              if (!a(t))
-                return n(new TypeError("Promise.race accepts an array"));
-              for (var r = 0, i = t.length; r < i; r++)
-                u.resolve(t[r]).then(e, n);
+              if (!a(t)) return n(new TypeError("Promise.race accepts an array"));
+              for (var r = 0, i = t.length; r < i; r++) u.resolve(t[r]).then(e, n);
             });
           }),
           (u._immediateFn =
@@ -614,8 +538,7 @@
               (o._invoke = (function (t, e, n) {
                 var r = "suspendedStart";
                 return function (i, o) {
-                  if ("executing" === r)
-                    throw new Error("Generator is already running");
+                  if ("executing" === r) throw new Error("Generator is already running");
                   if ("completed" === r) {
                     if ("throw" === i) throw o;
                     return C();
@@ -631,24 +554,16 @@
                     }
                     if ("next" === n.method) n.sent = n._sent = n.arg;
                     else if ("throw" === n.method) {
-                      if ("suspendedStart" === r)
-                        throw ((r = "completed"), n.arg);
+                      if ("suspendedStart" === r) throw ((r = "completed"), n.arg);
                       n.dispatchException(n.arg);
                     } else "return" === n.method && n.abrupt("return", n.arg);
                     r = "executing";
                     var u = s(t, e, n);
                     if ("normal" === u.type) {
-                      if (
-                        ((r = n.done ? "completed" : "suspendedYield"),
-                        u.arg === l)
-                      )
-                        continue;
+                      if (((r = n.done ? "completed" : "suspendedYield"), u.arg === l)) continue;
                       return { value: u.arg, done: n.done };
                     }
-                    "throw" === u.type &&
-                      ((r = "completed"),
-                      (n.method = "throw"),
-                      (n.arg = u.arg));
+                    "throw" === u.type && ((r = "completed"), (n.method = "throw"), (n.arg = u.arg));
                   }
                 };
               })(t, n, a)),
@@ -721,33 +636,20 @@
             var n = t.iterator[e.method];
             if (void 0 === n) {
               if (((e.delegate = null), "throw" === e.method)) {
-                if (
-                  t.iterator.return &&
-                  ((e.method = "return"),
-                  (e.arg = void 0),
-                  g(t, e),
-                  "throw" === e.method)
-                )
+                if (t.iterator.return && ((e.method = "return"), (e.arg = void 0), g(t, e), "throw" === e.method))
                   return l;
-                (e.method = "throw"),
-                  (e.arg = new TypeError(
-                    "The iterator does not provide a 'throw' method"
-                  ));
+                (e.method = "throw"), (e.arg = new TypeError("The iterator does not provide a 'throw' method"));
               }
               return l;
             }
             var r = s(n, t.iterator, e.arg);
-            if ("throw" === r.type)
-              return (
-                (e.method = "throw"), (e.arg = r.arg), (e.delegate = null), l
-              );
+            if ("throw" === r.type) return (e.method = "throw"), (e.arg = r.arg), (e.delegate = null), l;
             var i = r.arg;
             return i
               ? i.done
                 ? ((e[t.resultName] = i.value),
                   (e.next = t.nextLoc),
-                  "return" !== e.method &&
-                    ((e.method = "next"), (e.arg = void 0)),
+                  "return" !== e.method && ((e.method = "next"), (e.arg = void 0)),
                   (e.delegate = null),
                   l)
                 : i
@@ -767,9 +669,7 @@
             (e.type = "normal"), delete e.arg, (t.completion = e);
           }
           function E(t) {
-            (this.tryEntries = [{ tryLoc: "root" }]),
-              t.forEach(b, this),
-              this.reset(!0);
+            (this.tryEntries = [{ tryLoc: "root" }]), t.forEach(b, this), this.reset(!0);
           }
           function O(t) {
             if (t) {
@@ -779,9 +679,7 @@
               if (!isNaN(t.length)) {
                 var r = -1,
                   o = function e() {
-                    for (; ++r < t.length; )
-                      if (n.call(t, r))
-                        return (e.value = t[r]), (e.done = !1), e;
+                    for (; ++r < t.length; ) if (n.call(t, r)) return (e.value = t[r]), (e.done = !1), e;
                     return (e.value = void 0), (e.done = !0), e;
                   };
                 return (o.next = o);
@@ -799,16 +697,11 @@
             (d.displayName = c(h, a, "GeneratorFunction")),
             (t.isGeneratorFunction = function (t) {
               var e = "function" == typeof t && t.constructor;
-              return (
-                !!e &&
-                (e === d || "GeneratorFunction" === (e.displayName || e.name))
-              );
+              return !!e && (e === d || "GeneratorFunction" === (e.displayName || e.name));
             }),
             (t.mark = function (t) {
               return (
-                Object.setPrototypeOf
-                  ? Object.setPrototypeOf(t, h)
-                  : ((t.__proto__ = h), c(t, a, "GeneratorFunction")),
+                Object.setPrototypeOf ? Object.setPrototypeOf(t, h) : ((t.__proto__ = h), c(t, a, "GeneratorFunction")),
                 (t.prototype = Object.create(_)),
                 t
               );
@@ -868,10 +761,7 @@
                   !t)
                 )
                   for (var e in this)
-                    "t" === e.charAt(0) &&
-                      n.call(this, e) &&
-                      !isNaN(+e.slice(1)) &&
-                      (this[e] = void 0);
+                    "t" === e.charAt(0) && n.call(this, e) && !isNaN(+e.slice(1)) && (this[e] = void 0);
               },
               stop: function () {
                 this.done = !0;
@@ -884,11 +774,7 @@
                 var e = this;
                 function r(n, r) {
                   return (
-                    (a.type = "throw"),
-                    (a.arg = t),
-                    (e.next = n),
-                    r && ((e.method = "next"), (e.arg = void 0)),
-                    !!r
+                    (a.type = "throw"), (a.arg = t), (e.next = n), r && ((e.method = "next"), (e.arg = void 0)), !!r
                   );
                 }
                 for (var i = this.tryEntries.length - 1; i >= 0; --i) {
@@ -904,10 +790,7 @@
                     } else if (c) {
                       if (this.prev < o.catchLoc) return r(o.catchLoc, !0);
                     } else {
-                      if (!u)
-                        throw new Error(
-                          "try statement without catch or finally"
-                        );
+                      if (!u) throw new Error("try statement without catch or finally");
                       if (this.prev < o.finallyLoc) return r(o.finallyLoc);
                     }
                   }
@@ -916,27 +799,17 @@
               abrupt: function (t, e) {
                 for (var r = this.tryEntries.length - 1; r >= 0; --r) {
                   var i = this.tryEntries[r];
-                  if (
-                    i.tryLoc <= this.prev &&
-                    n.call(i, "finallyLoc") &&
-                    this.prev < i.finallyLoc
-                  ) {
+                  if (i.tryLoc <= this.prev && n.call(i, "finallyLoc") && this.prev < i.finallyLoc) {
                     var o = i;
                     break;
                   }
                 }
-                o &&
-                  ("break" === t || "continue" === t) &&
-                  o.tryLoc <= e &&
-                  e <= o.finallyLoc &&
-                  (o = null);
+                o && ("break" === t || "continue" === t) && o.tryLoc <= e && e <= o.finallyLoc && (o = null);
                 var a = o ? o.completion : {};
                 return (
                   (a.type = t),
                   (a.arg = e),
-                  o
-                    ? ((this.method = "next"), (this.next = o.finallyLoc), l)
-                    : this.complete(a)
+                  o ? ((this.method = "next"), (this.next = o.finallyLoc), l) : this.complete(a)
                 );
               },
               complete: function (t, e) {
@@ -945,9 +818,7 @@
                   "break" === t.type || "continue" === t.type
                     ? (this.next = t.arg)
                     : "return" === t.type
-                    ? ((this.rval = this.arg = t.arg),
-                      (this.method = "return"),
-                      (this.next = "end"))
+                    ? ((this.rval = this.arg = t.arg), (this.method = "return"), (this.next = "end"))
                     : "normal" === t.type && e && (this.next = e),
                   l
                 );
@@ -955,8 +826,7 @@
               finish: function (t) {
                 for (var e = this.tryEntries.length - 1; e >= 0; --e) {
                   var n = this.tryEntries[e];
-                  if (n.finallyLoc === t)
-                    return this.complete(n.completion, n.afterLoc), P(n), l;
+                  if (n.finallyLoc === t) return this.complete(n.completion, n.afterLoc), P(n), l;
                 }
               },
               catch: function (t) {
@@ -1034,9 +904,7 @@
           if (
             !r &&
             !(r =
-              ("undefined" != typeof crypto &&
-                crypto.getRandomValues &&
-                crypto.getRandomValues.bind(crypto)) ||
+              ("undefined" != typeof crypto && crypto.getRandomValues && crypto.getRandomValues.bind(crypto)) ||
               ("undefined" != typeof msCrypto &&
                 "function" == typeof msCrypto.getRandomValues &&
                 msCrypto.getRandomValues.bind(msCrypto)))
@@ -1061,10 +929,7 @@
         var l,
           f,
           d = function (t) {
-            var e =
-                arguments.length > 1 && void 0 !== arguments[1]
-                  ? arguments[1]
-                  : 0,
+            var e = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 0,
               n = (
                 u[t[e + 0]] +
                 u[t[e + 1]] +
@@ -1113,10 +978,7 @@
             throw new Error("uuid.v1(): Can't create more than 10M uuids/sec");
           (h = s), (p = v), (f = c);
           var _ = (1e4 * (268435455 & (s += 122192928e5)) + v) % 4294967296;
-          (i[r++] = (_ >>> 24) & 255),
-            (i[r++] = (_ >>> 16) & 255),
-            (i[r++] = (_ >>> 8) & 255),
-            (i[r++] = 255 & _);
+          (i[r++] = (_ >>> 24) & 255), (i[r++] = (_ >>> 16) & 255), (i[r++] = (_ >>> 8) & 255), (i[r++] = 255 & _);
           var m = ((s / 4294967296) * 1e4) & 268435455;
           (i[r++] = (m >>> 8) & 255),
             (i[r++] = 255 & m),
@@ -1142,8 +1004,7 @@
             (n[7] = 255 & e),
             (n[8] = (e = parseInt(t.slice(19, 23), 16)) >>> 8),
             (n[9] = 255 & e),
-            (n[10] =
-              ((e = parseInt(t.slice(24, 36), 16)) / 1099511627776) & 255),
+            (n[10] = ((e = parseInt(t.slice(24, 36), 16)) / 1099511627776) & 255),
             (n[11] = (e / 4294967296) & 255),
             (n[12] = (e >>> 24) & 255),
             (n[13] = (e >>> 16) & 255),
@@ -1158,24 +1019,15 @@
               ("string" == typeof t &&
                 (t = (function (t) {
                   t = unescape(encodeURIComponent(t));
-                  for (var e = [], n = 0; n < t.length; ++n)
-                    e.push(t.charCodeAt(n));
+                  for (var e = [], n = 0; n < t.length; ++n) e.push(t.charCodeAt(n));
                   return e;
                 })(t)),
               "string" == typeof r && (r = y(r)),
               16 !== r.length)
             )
-              throw TypeError(
-                "Namespace must be array-like (16 iterable integer values, 0-255)"
-              );
+              throw TypeError("Namespace must be array-like (16 iterable integer values, 0-255)");
             var a = new Uint8Array(16 + t.length);
-            if (
-              (a.set(r),
-              a.set(t, r.length),
-              ((a = n(a))[6] = (15 & a[6]) | e),
-              (a[8] = (63 & a[8]) | 128),
-              i)
-            ) {
+            if ((a.set(r), a.set(t, r.length), ((a = n(a))[6] = (15 & a[6]) | e), (a[8] = (63 & a[8]) | 128), i)) {
               o = o || 0;
               for (var c = 0; c < 16; ++c) i[o + c] = a[c];
               return i;
@@ -1185,11 +1037,7 @@
           try {
             r.name = t;
           } catch (t) {}
-          return (
-            (r.DNS = "6ba7b810-9dad-11d1-80b4-00c04fd430c8"),
-            (r.URL = "6ba7b811-9dad-11d1-80b4-00c04fd430c8"),
-            r
-          );
+          return (r.DNS = "6ba7b810-9dad-11d1-80b4-00c04fd430c8"), (r.URL = "6ba7b811-9dad-11d1-80b4-00c04fd430c8"), r;
         }
         function m(t) {
           return 14 + (((t + 64) >>> 9) << 4) + 1;
@@ -1199,10 +1047,7 @@
           return (((t >> 16) + (e >> 16) + (n >> 16)) << 16) | (65535 & n);
         }
         function g(t, e, n, r, i, o) {
-          return w(
-            ((a = w(w(e, t), w(r, o))) << (c = i)) | (a >>> (32 - c)),
-            n
-          );
+          return w(((a = w(w(e, t), w(r, o))) << (c = i)) | (a >>> (32 - c)), n);
           var a, c;
         }
         function b(t, e, n, r, i, o, a) {
@@ -1226,26 +1071,14 @@
           return (function (t) {
             for (var e = [], n = 32 * t.length, r = 0; r < n; r += 8) {
               var i = (t[r >> 5] >>> r % 32) & 255,
-                o = parseInt(
-                  "0123456789abcdef".charAt((i >>> 4) & 15) +
-                    "0123456789abcdef".charAt(15 & i),
-                  16
-                );
+                o = parseInt("0123456789abcdef".charAt((i >>> 4) & 15) + "0123456789abcdef".charAt(15 & i), 16);
               e.push(o);
             }
             return e;
           })(
             (function (t, e) {
               (t[e >> 5] |= 128 << e % 32), (t[m(e) - 1] = e);
-              for (
-                var n = 1732584193,
-                  r = -271733879,
-                  i = -1732584194,
-                  o = 271733878,
-                  a = 0;
-                a < t.length;
-                a += 16
-              ) {
+              for (var n = 1732584193, r = -271733879, i = -1732584194, o = 271733878, a = 0; a < t.length; a += 16) {
                 var c = n,
                   u = r,
                   s = i,
@@ -1323,11 +1156,7 @@
             })(
               (function (t) {
                 if (0 === t.length) return [];
-                for (
-                  var e = 8 * t.length, n = new Uint32Array(m(e)), r = 0;
-                  r < e;
-                  r += 8
-                )
+                for (var e = 8 * t.length, n = new Uint32Array(m(e)), r = 0; r < e; r += 8)
                   n[r >> 5] |= (255 & t[r / 8]) << r % 32;
                 return n;
               })(t),
@@ -1368,14 +1197,7 @@
               for (var i = 0; i < r.length; ++i) t.push(r.charCodeAt(i));
             } else Array.isArray(t) || (t = Array.prototype.slice.call(t));
             t.push(128);
-            for (
-              var o = t.length / 4 + 2,
-                a = Math.ceil(o / 16),
-                c = new Array(a),
-                u = 0;
-              u < a;
-              ++u
-            ) {
+            for (var o = t.length / 4 + 2, a = Math.ceil(o / 16), c = new Array(a), u = 0; u < a; ++u) {
               for (var s = new Uint32Array(16), l = 0; l < 16; ++l)
                 s[l] =
                   (t[64 * u + 4 * l] << 24) |
@@ -1388,15 +1210,9 @@
               (c[a - 1][14] = Math.floor(c[a - 1][14])),
               (c[a - 1][15] = (8 * (t.length - 1)) & 4294967295);
             for (var f = 0; f < a; ++f) {
-              for (var d = new Uint32Array(80), h = 0; h < 16; ++h)
-                d[h] = c[f][h];
-              for (var p = 16; p < 80; ++p)
-                d[p] = I(d[p - 3] ^ d[p - 8] ^ d[p - 14] ^ d[p - 16], 1);
-              for (
-                var v = n[0], y = n[1], _ = n[2], m = n[3], w = n[4], g = 0;
-                g < 80;
-                ++g
-              ) {
+              for (var d = new Uint32Array(80), h = 0; h < 16; ++h) d[h] = c[f][h];
+              for (var p = 16; p < 80; ++p) d[p] = I(d[p - 3] ^ d[p - 8] ^ d[p - 14] ^ d[p - 16], 1);
+              for (var v = n[0], y = n[1], _ = n[2], m = n[3], w = n[4], g = 0; g < 80; ++g) {
                 var b = Math.floor(g / 20),
                   P = (I(v, 5) + T(b, y, _, m) + w + e[b] + d[g]) >>> 0;
                 (w = m), (m = _), (_ = I(y, 30) >>> 0), (y = v), (v = P);
@@ -1471,14 +1287,10 @@
               if (t && t.__esModule) return t;
               var e = {};
               if (null != t)
-                for (var n in t)
-                  "default" !== n &&
-                    Object.prototype.hasOwnProperty.call(t, n) &&
-                    r(e, t, n);
+                for (var n in t) "default" !== n && Object.prototype.hasOwnProperty.call(t, n) && r(e, t, n);
               return i(e, t), e;
             };
-        Object.defineProperty(e, "__esModule", { value: !0 }),
-          (e.UWT = e.SET = e.OneTag = void 0);
+        Object.defineProperty(e, "__esModule", { value: !0 }), (e.UWT = e.SET = e.OneTag = void 0);
         var a = o(n(6057)),
           c = o(n(510));
         e.OneTag = c;
@@ -1504,9 +1316,7 @@
                 Object.assign ||
                 function (t) {
                   for (var e, n = 1, r = arguments.length; n < r; n++)
-                    for (var i in (e = arguments[n]))
-                      Object.prototype.hasOwnProperty.call(e, i) &&
-                        (t[i] = e[i]);
+                    for (var i in (e = arguments[n])) Object.prototype.hasOwnProperty.call(e, i) && (t[i] = e[i]);
                   return t;
                 }).apply(this, arguments);
             },
@@ -1543,31 +1353,18 @@
               if (t && t.__esModule) return t;
               var e = {};
               if (null != t)
-                for (var n in t)
-                  "default" !== n &&
-                    Object.prototype.hasOwnProperty.call(t, n) &&
-                    i(e, t, n);
+                for (var n in t) "default" !== n && Object.prototype.hasOwnProperty.call(t, n) && i(e, t, n);
               return o(e, t), e;
             };
         Object.defineProperty(e, "__esModule", { value: !0 }),
-          (e.track_DEPRECATED =
-            e.buildScript_DEPRECATED =
-            e.buildPixel_DEPRECATED =
-            e.buildIframe_DEPRECATED =
-              void 0);
+          (e.track_DEPRECATED = e.buildScript_DEPRECATED = e.buildPixel_DEPRECATED = e.buildIframe_DEPRECATED = void 0);
         var c = a(n(1952)),
           u = a(n(8352)),
           s = a(n(3257)),
           l = n(4654);
         e.track_DEPRECATED = function (t, e, n) {
-          if (!t)
-            throw new Error(
-              l.utilities.LogPrefix + ": Cannot track event without pixel ID"
-            );
-          if (!e)
-            throw new Error(
-              l.utilities.LogPrefix + ": Cannot track event without event name"
-            );
+          if (!t) throw new Error(l.utilities.LogPrefix + ": Cannot track event without pixel ID");
+          if (!e) throw new Error(l.utilities.LogPrefix + ": Cannot track event without event name");
           var i = new c.AccountParams({ merch_id: t }),
             o = new c.EventParams(
               r(
@@ -1619,9 +1416,7 @@
                 Object.assign ||
                 function (t) {
                   for (var e, n = 1, r = arguments.length; n < r; n++)
-                    for (var i in (e = arguments[n]))
-                      Object.prototype.hasOwnProperty.call(e, i) &&
-                        (t[i] = e[i]);
+                    for (var i in (e = arguments[n])) Object.prototype.hasOwnProperty.call(e, i) && (t[i] = e[i]);
                   return t;
                 }).apply(this, arguments);
             },
@@ -1658,14 +1453,10 @@
               if (t && t.__esModule) return t;
               var e = {};
               if (null != t)
-                for (var n in t)
-                  "default" !== n &&
-                    Object.prototype.hasOwnProperty.call(t, n) &&
-                    i(e, t, n);
+                for (var n in t) "default" !== n && Object.prototype.hasOwnProperty.call(t, n) && i(e, t, n);
               return o(e, t), e;
             };
-        Object.defineProperty(e, "__esModule", { value: !0 }),
-          (e.set = e.event = e.config = void 0);
+        Object.defineProperty(e, "__esModule", { value: !0 }), (e.set = e.event = e.config = void 0);
         var c = a(n(1952)),
           u = a(n(3257)),
           s = n(4654),
@@ -1676,17 +1467,11 @@
         };
         e.config = function (t, e) {
           if ((void 0 === e && (e = {}), !t || "string" != typeof t))
-            throw new Error(
-              s.utilities.LogPrefix +
-                ": Config is missing required Advertiser Id"
-            );
+            throw new Error(s.utilities.LogPrefix + ": Config is missing required Advertiser Id");
           e = e && s.utilities.isObject(e) ? e : {};
           var n = (f[t] = new c.AccountParams(r(r({}, e), { txn_id: t })));
           u.init(n), c.globalParams.calledConfig();
-          var i = s.utilities.splitObjectByPropNames(
-              e,
-              c.NonEventParameterKeys
-            ),
+          var i = s.utilities.splitObjectByPropNames(e, c.NonEventParameterKeys),
             o = i[0],
             a = i[1],
             d = new c.EventParams(
@@ -1705,20 +1490,14 @@
         };
         e.event = function (t, e) {
           if ((void 0 === e && (e = {}), !t))
-            throw new Error(
-              s.utilities.LogPrefix +
-                ": Event cannot send event without an Event Code Id"
-            );
+            throw new Error(s.utilities.LogPrefix + ": Event cannot send event without an Event Code Id");
           e = e && s.utilities.isObject(e) ? e : {};
           var n,
             i = s.utilities.parseEventCodeId(t),
             o = i[0];
           i[1];
           o && ((n = f[o] || new c.AccountParams({ txn_id: o })), u.init(n));
-          var a = s.utilities.splitObjectByPropNames(
-              e,
-              c.NonEventParameterKeys
-            ),
+          var a = s.utilities.splitObjectByPropNames(e, c.NonEventParameterKeys),
             l = a[0],
             d = a[1],
             h = new c.EventParams(
@@ -1744,9 +1523,7 @@
                 Object.assign ||
                 function (t) {
                   for (var e, n = 1, r = arguments.length; n < r; n++)
-                    for (var i in (e = arguments[n]))
-                      Object.prototype.hasOwnProperty.call(e, i) &&
-                        (t[i] = e[i]);
+                    for (var i in (e = arguments[n])) Object.prototype.hasOwnProperty.call(e, i) && (t[i] = e[i]);
                   return t;
                 }).apply(this, arguments);
             },
@@ -1783,20 +1560,15 @@
               if (t && t.__esModule) return t;
               var e = {};
               if (null != t)
-                for (var n in t)
-                  "default" !== n &&
-                    Object.prototype.hasOwnProperty.call(t, n) &&
-                    i(e, t, n);
+                for (var n in t) "default" !== n && Object.prototype.hasOwnProperty.call(t, n) && i(e, t, n);
               return o(e, t), e;
             };
-        Object.defineProperty(e, "__esModule", { value: !0 }),
-          (e.trackPid = void 0);
+        Object.defineProperty(e, "__esModule", { value: !0 }), (e.trackPid = void 0);
         var c = a(n(1952)),
           u = a(n(3257)),
           s = n(4654);
         e.trackPid = function (t, e) {
-          if ((void 0 === e && (e = {}), !t))
-            throw new Error(s.utilities.LogPrefix + ": No Pixel ID Found");
+          if ((void 0 === e && (e = {}), !t)) throw new Error(s.utilities.LogPrefix + ": No Pixel ID Found");
           e = e || {};
           var n = new c.AccountParams({ txn_id: t }),
             i = new c.EventParams(
@@ -1821,9 +1593,7 @@
                 Object.assign ||
                 function (t) {
                   for (var e, n = 1, r = arguments.length; n < r; n++)
-                    for (var i in (e = arguments[n]))
-                      Object.prototype.hasOwnProperty.call(e, i) &&
-                        (t[i] = e[i]);
+                    for (var i in (e = arguments[n])) Object.prototype.hasOwnProperty.call(e, i) && (t[i] = e[i]);
                   return t;
                 }).apply(this, arguments);
             },
@@ -1860,48 +1630,31 @@
               if (t && t.__esModule) return t;
               var e = {};
               if (null != t)
-                for (var n in t)
-                  "default" !== n &&
-                    Object.prototype.hasOwnProperty.call(t, n) &&
-                    i(e, t, n);
+                for (var n in t) "default" !== n && Object.prototype.hasOwnProperty.call(t, n) && i(e, t, n);
               return o(e, t), e;
             };
         Object.defineProperty(e, "__esModule", { value: !0 }),
-          (e.track =
-            e.setDefaultAccountParams =
-            e.init =
-            e.defaultAccountParams =
-              void 0);
+          (e.track = e.setDefaultAccountParams = e.init = e.defaultAccountParams = void 0);
         var c,
           u = a(n(1952)),
           s = a(n(3257)),
           l = n(4654);
         e.defaultAccountParams = c;
         var f = function (t) {
-          (e.defaultAccountParams = c = new u.AccountParams({ txn_id: t })),
-            s.init(c);
+          (e.defaultAccountParams = c = new u.AccountParams({ txn_id: t })), s.init(c);
         };
         e.setDefaultAccountParams = f;
         e.init = function (t) {
           if (!t || "string" != typeof t)
-            throw new Error(
-              l.utilities.LogPrefix + ": Init is missing required Pixel Id"
-            );
+            throw new Error(l.utilities.LogPrefix + ": Init is missing required Pixel Id");
           f(t), u.globalParams.calledInit();
         };
         e.track = function (t, e) {
           if ((void 0 === e && (e = {}), !t || "string" != typeof t))
-            throw new Error(
-              l.utilities.LogPrefix + ": Track is missing required event name"
-            );
-          if (!c.getPixelId())
-            throw new Error(l.utilities.LogPrefix + ": No Pixel ID Found");
-          (e = e && l.utilities.isObject(e) ? e : {}),
-            (t = t.toLowerCase().trim());
-          var n = l.utilities.splitObjectByPropNames(
-              e,
-              u.NonEventParameterKeys
-            ),
+            throw new Error(l.utilities.LogPrefix + ": Track is missing required event name");
+          if (!c.getPixelId()) throw new Error(l.utilities.LogPrefix + ": No Pixel ID Found");
+          (e = e && l.utilities.isObject(e) ? e : {}), (t = t.toLowerCase().trim());
+          var n = l.utilities.splitObjectByPropNames(e, u.NonEventParameterKeys),
             i = n[0],
             o = n[1],
             a = new u.EventParams(
@@ -1931,25 +1684,16 @@
                     t.__proto__ = e;
                   }) ||
                 function (t, e) {
-                  for (var n in e)
-                    Object.prototype.hasOwnProperty.call(e, n) && (t[n] = e[n]);
+                  for (var n in e) Object.prototype.hasOwnProperty.call(e, n) && (t[n] = e[n]);
                 })(t, e);
             }),
             function (t, e) {
               if ("function" != typeof e && null !== e)
-                throw new TypeError(
-                  "Class extends value " +
-                    String(e) +
-                    " is not a constructor or null"
-                );
+                throw new TypeError("Class extends value " + String(e) + " is not a constructor or null");
               function n() {
                 this.constructor = t;
               }
-              r(t, e),
-                (t.prototype =
-                  null === e
-                    ? Object.create(e)
-                    : ((n.prototype = e.prototype), new n()));
+              r(t, e), (t.prototype = null === e ? Object.create(e) : ((n.prototype = e.prototype), new n()));
             }),
           o =
             (this && this.__assign) ||
@@ -1958,9 +1702,7 @@
                 Object.assign ||
                 function (t) {
                   for (var e, n = 1, r = arguments.length; n < r; n++)
-                    for (var i in (e = arguments[n]))
-                      Object.prototype.hasOwnProperty.call(e, i) &&
-                        (t[i] = e[i]);
+                    for (var i in (e = arguments[n])) Object.prototype.hasOwnProperty.call(e, i) && (t[i] = e[i]);
                   return t;
                 }).apply(this, arguments);
             };
@@ -2015,12 +1757,7 @@
                 n = e[0],
                 r = e[1],
                 i = Object.keys(n).reduce(function (t, e) {
-                  return (
-                    (t[e.trim().toLowerCase()] = a.utilities.hashParameter(
-                      n[e]
-                    )),
-                    t
-                  );
+                  return (t[e.trim().toLowerCase()] = a.utilities.hashParameter(n[e])), t;
                 }, {});
               a.utilities.mergeObjects(this.paramKVs, i, r);
             }),
@@ -2031,16 +1768,9 @@
               var t,
                 e,
                 n =
-                  (null === (t = this.paramKVs) || void 0 === t
-                    ? void 0
-                    : t.txn_id) ||
-                  (null === (e = this.paramKVs) || void 0 === e
-                    ? void 0
-                    : e.merch_id);
-              if (!n)
-                throw new Error(
-                  a.utilities.LogPrefix + ": Pixel Id doesn't exist."
-                );
+                  (null === (t = this.paramKVs) || void 0 === t ? void 0 : t.txn_id) ||
+                  (null === (e = this.paramKVs) || void 0 === e ? void 0 : e.merch_id);
+              if (!n) throw new Error(a.utilities.LogPrefix + ": Pixel Id doesn't exist.");
               return n;
             }),
             t
@@ -2057,10 +1787,7 @@
                   version: "2.3.30",
                   p_id: "Twitter",
                   p_user_id: "0",
-                  integration:
-                    (null === (e = window.twq) || void 0 === e
-                      ? void 0
-                      : e.integration) || "advertiser",
+                  integration: (null === (e = window.twq) || void 0 === e ? void 0 : e.integration) || "advertiser",
                 }) || this;
             return (n.bciLoader = window.twq ? 2 : 1), (n.bciCmd = 0), n;
           }
@@ -2104,16 +1831,12 @@
         function v(t) {
           var e = a.environment.isInIFrame();
           (t.tw_iframe_status = Number(e).toString()),
-            e &&
-              "" !== document.referrer &&
-              (t.tw_document_referrer = document.referrer);
+            e && "" !== document.referrer && (t.tw_document_referrer = document.referrer);
         }
         function y(t, e) {
           e.tw_document_href = location.href;
           var n = t.hide_page_location ? "" : t.page_location;
-          void 0 !== n &&
-            ((e.tw_document_href = n),
-            e.tw_document_referrer && (e.tw_document_referrer = n));
+          void 0 !== n && ((e.tw_document_href = n), e.tw_document_referrer && (e.tw_document_referrer = n));
         }
         (e.globalParams = p),
           (e.setIframe = v),
@@ -2121,12 +1844,7 @@
           (e.merge = function (t) {
             var e = t.accountParams,
               n = t.eventParams,
-              r = a.utilities.mergeObjects(
-                {},
-                p.get(),
-                (null == e ? void 0 : e.get()) || {},
-                n.get()
-              ),
+              r = a.utilities.mergeObjects({}, p.get(), (null == e ? void 0 : e.get()) || {}, n.get()),
               i = a.utilities.splitObjectByPropNames(r, u),
               o = i[0],
               c = i[1];
@@ -2142,9 +1860,7 @@
                 Object.assign ||
                 function (t) {
                   for (var e, n = 1, r = arguments.length; n < r; n++)
-                    for (var i in (e = arguments[n]))
-                      Object.prototype.hasOwnProperty.call(e, i) &&
-                        (t[i] = e[i]);
+                    for (var i in (e = arguments[n])) Object.prototype.hasOwnProperty.call(e, i) && (t[i] = e[i]);
                   return t;
                 }).apply(this, arguments);
             },
@@ -2207,25 +1923,17 @@
               function c(o) {
                 return function (c) {
                   return (function (o) {
-                    if (n)
-                      throw new TypeError("Generator is already executing.");
+                    if (n) throw new TypeError("Generator is already executing.");
                     for (; a; )
                       try {
                         if (
                           ((n = 1),
                           r &&
-                            (i =
-                              2 & o[0]
-                                ? r.return
-                                : o[0]
-                                ? r.throw || ((i = r.return) && i.call(r), 0)
-                                : r.next) &&
+                            (i = 2 & o[0] ? r.return : o[0] ? r.throw || ((i = r.return) && i.call(r), 0) : r.next) &&
                             !(i = i.call(r, o[1])).done)
                         )
                           return i;
-                        switch (
-                          ((r = 0), i && (o = [2 & o[0], i.value]), o[0])
-                        ) {
+                        switch (((r = 0), i && (o = [2 & o[0], i.value]), o[0])) {
                           case 0:
                           case 1:
                             i = o;
@@ -2239,18 +1947,11 @@
                             (o = a.ops.pop()), a.trys.pop();
                             continue;
                           default:
-                            if (
-                              !((i = a.trys),
-                              (i = i.length > 0 && i[i.length - 1]) ||
-                                (6 !== o[0] && 2 !== o[0]))
-                            ) {
+                            if (!((i = a.trys), (i = i.length > 0 && i[i.length - 1]) || (6 !== o[0] && 2 !== o[0]))) {
                               a = 0;
                               continue;
                             }
-                            if (
-                              3 === o[0] &&
-                              (!i || (o[1] > i[0] && o[1] < i[3]))
-                            ) {
+                            if (3 === o[0] && (!i || (o[1] > i[0] && o[1] < i[3]))) {
                               a.label = o[1];
                               break;
                             }
@@ -2287,28 +1988,17 @@
               void 0);
         var a = n(4654),
           c = function (t) {
-            return (
-              void 0 === t && (t = a.utilities.AdsApiVersion.v0),
-              "https://t.co/" + t + "/adsct"
-            );
+            return void 0 === t && (t = a.utilities.AdsApiVersion.v0), "https://t.co/" + t + "/adsct";
           };
         e.TCO_BASE = c;
-        var u = /^(\S+\.)?x\.com/.test(document.location.host)
-            ? "analytics.x.com"
-            : "analytics.twitter.com",
+        var u = /^(\S+\.)?x\.com/.test(document.location.host) ? "analytics.x.com" : "analytics.twitter.com",
           s = function (t) {
-            return (
-              void 0 === t && (t = a.utilities.AdsApiVersion.v0),
-              "https://" + u + "/" + t + "/adsct"
-            );
+            return void 0 === t && (t = a.utilities.AdsApiVersion.v0), "https://" + u + "/" + t + "/adsct";
           };
         e.TWITTER_BASE = s;
         e.trackPid = function (t, e) {
           return (
-            (e = r(
-              { adsApiVersion: a.utilities.AdsApiVersion.v1, needResponse: !1 },
-              e
-            )),
+            (e = r({ adsApiVersion: a.utilities.AdsApiVersion.v1, needResponse: !1 }, e)),
             l(c(e.adsApiVersion), t),
             l(s(e.adsApiVersion), t, e)
           );
@@ -2430,10 +2120,7 @@
               if (t && t.__esModule) return t;
               var e = {};
               if (null != t)
-                for (var n in t)
-                  "default" !== n &&
-                    Object.prototype.hasOwnProperty.call(t, n) &&
-                    r(e, t, n);
+                for (var n in t) "default" !== n && Object.prototype.hasOwnProperty.call(t, n) && r(e, t, n);
               return i(e, t), e;
             },
           a =
@@ -2495,25 +2182,17 @@
               function c(o) {
                 return function (c) {
                   return (function (o) {
-                    if (n)
-                      throw new TypeError("Generator is already executing.");
+                    if (n) throw new TypeError("Generator is already executing.");
                     for (; a; )
                       try {
                         if (
                           ((n = 1),
                           r &&
-                            (i =
-                              2 & o[0]
-                                ? r.return
-                                : o[0]
-                                ? r.throw || ((i = r.return) && i.call(r), 0)
-                                : r.next) &&
+                            (i = 2 & o[0] ? r.return : o[0] ? r.throw || ((i = r.return) && i.call(r), 0) : r.next) &&
                             !(i = i.call(r, o[1])).done)
                         )
                           return i;
-                        switch (
-                          ((r = 0), i && (o = [2 & o[0], i.value]), o[0])
-                        ) {
+                        switch (((r = 0), i && (o = [2 & o[0], i.value]), o[0])) {
                           case 0:
                           case 1:
                             i = o;
@@ -2527,18 +2206,11 @@
                             (o = a.ops.pop()), a.trys.pop();
                             continue;
                           default:
-                            if (
-                              !((i = a.trys),
-                              (i = i.length > 0 && i[i.length - 1]) ||
-                                (6 !== o[0] && 2 !== o[0]))
-                            ) {
+                            if (!((i = a.trys), (i = i.length > 0 && i[i.length - 1]) || (6 !== o[0] && 2 !== o[0]))) {
                               a = 0;
                               continue;
                             }
-                            if (
-                              3 === o[0] &&
-                              (!i || (o[1] > i[0] && o[1] < i[3]))
-                            ) {
+                            if (3 === o[0] && (!i || (o[1] > i[0] && o[1] < i[3]))) {
                               a.label = o[1];
                               break;
                             }
@@ -2565,8 +2237,7 @@
                 };
               }
             };
-        Object.defineProperty(e, "__esModule", { value: !0 }),
-          (e.track = e.init = void 0);
+        Object.defineProperty(e, "__esModule", { value: !0 }), (e.track = e.init = void 0);
         var u = o(n(1952)),
           s = o(n(8352)),
           l = n(4654);
@@ -2588,15 +2259,11 @@
                       c.sent(),
                       (t = !1),
                       e
-                        ? (l.twclid.requestAccIfNeeded(e.getPixelId()),
-                          [4, l.twclid.getTwclidParams(e.getPixelId())])
+                        ? (l.twclid.requestAccIfNeeded(e.getPixelId()), [4, l.twclid.getTwclidParams(e.getPixelId())])
                         : [3, 3]
                     );
                   case 2:
-                    (i = c.sent()),
-                      (t = 1 === i.tw_acc_response),
-                      n.set(i),
-                      (c.label = 3);
+                    (i = c.sent()), (t = 1 === i.tw_acc_response), n.set(i), (c.label = 3);
                   case 3:
                     return (
                       (o = u.merge({ accountParams: e, eventParams: n })),
@@ -2604,11 +2271,7 @@
                         adsApiVersion: r,
                         needResponse: t,
                       })),
-                      t &&
-                        l.twclid.cacheAccRequestAndSaveTwclid(
-                          null == e ? void 0 : e.getPixelId(),
-                          a
-                        ),
+                      t && l.twclid.cacheAccRequestAndSaveTwclid(null == e ? void 0 : e.getPixelId(), a),
                       [2]
                     );
                 }
@@ -2677,25 +2340,17 @@
               function c(o) {
                 return function (c) {
                   return (function (o) {
-                    if (n)
-                      throw new TypeError("Generator is already executing.");
+                    if (n) throw new TypeError("Generator is already executing.");
                     for (; a; )
                       try {
                         if (
                           ((n = 1),
                           r &&
-                            (i =
-                              2 & o[0]
-                                ? r.return
-                                : o[0]
-                                ? r.throw || ((i = r.return) && i.call(r), 0)
-                                : r.next) &&
+                            (i = 2 & o[0] ? r.return : o[0] ? r.throw || ((i = r.return) && i.call(r), 0) : r.next) &&
                             !(i = i.call(r, o[1])).done)
                         )
                           return i;
-                        switch (
-                          ((r = 0), i && (o = [2 & o[0], i.value]), o[0])
-                        ) {
+                        switch (((r = 0), i && (o = [2 & o[0], i.value]), o[0])) {
                           case 0:
                           case 1:
                             i = o;
@@ -2709,18 +2364,11 @@
                             (o = a.ops.pop()), a.trys.pop();
                             continue;
                           default:
-                            if (
-                              !((i = a.trys),
-                              (i = i.length > 0 && i[i.length - 1]) ||
-                                (6 !== o[0] && 2 !== o[0]))
-                            ) {
+                            if (!((i = a.trys), (i = i.length > 0 && i[i.length - 1]) || (6 !== o[0] && 2 !== o[0]))) {
                               a = 0;
                               continue;
                             }
-                            if (
-                              3 === o[0] &&
-                              (!i || (o[1] > i[0] && o[1] < i[3]))
-                            ) {
+                            if (3 === o[0] && (!i || (o[1] > i[0] && o[1] < i[3]))) {
                               a.label = o[1];
                               break;
                             }
@@ -2754,8 +2402,7 @@
           if (window.twq) {
             var t = window.twq;
             t.exe = function () {
-              for (var t = [], e = 0; e < arguments.length; e++)
-                t[e] = arguments[e];
+              for (var t = [], e = 0; e < arguments.length; e++) t[e] = arguments[e];
               return r(this, void 0, void 0, function () {
                 var e, n, r, c;
                 return i(this, function (i) {
@@ -2779,10 +2426,7 @@
                       }
                       i.label = 1;
                     case 1:
-                      return (
-                        i.trys.push([1, 4, , 5]),
-                        "function" != typeof r ? [3, 3] : [4, r.apply(null, n)]
-                      );
+                      return i.trys.push([1, 4, , 5]), "function" != typeof r ? [3, 3] : [4, r.apply(null, n)];
                     case 2:
                       i.sent(), (i.label = 3);
                     case 3:
@@ -2795,8 +2439,7 @@
                 });
               });
             };
-            for (var e = 0; e < t.queue.length; e++)
-              t.exe.apply(null, t.queue[e]);
+            for (var e = 0; e < t.queue.length; e++) t.exe.apply(null, t.queue[e]);
           }
         })();
       },
@@ -2810,38 +2453,23 @@
         Object.defineProperty(e, "__esModule", { value: !0 });
         var i = r(n(6527));
         (window.twttr = window.twttr || {}),
-          window.twttr.conversion ||
-            ((window.twttr.conversion = i.default), n(2345));
+          window.twttr.conversion || ((window.twttr.conversion = i.default), n(2345));
       },
       6575: function (t, e, n) {
         "use strict";
-        Object.defineProperty(e, "__esModule", { value: !0 }),
-          (e.Cookies = void 0);
+        Object.defineProperty(e, "__esModule", { value: !0 }), (e.Cookies = void 0);
         var r = n(3532),
           i = (function () {
             function t() {}
             return (
               (t.setCookie = function (e, n, i) {
-                if ((void 0 === i && (i = {}), !e))
-                  throw new Error(
-                    r.LogPrefix + " Missing key for " + e + " cookie"
-                  );
-                if (!n)
-                  throw new Error(
-                    r.LogPrefix + " Missing value for " + e + " cookie"
-                  );
-                var o =
-                  e +
-                  "=" +
-                  encodeURIComponent(n) +
-                  t.convertCookieOptionsToString(i);
+                if ((void 0 === i && (i = {}), !e)) throw new Error(r.LogPrefix + " Missing key for " + e + " cookie");
+                if (!n) throw new Error(r.LogPrefix + " Missing value for " + e + " cookie");
+                var o = e + "=" + encodeURIComponent(n) + t.convertCookieOptionsToString(i);
                 document.cookie = o;
               }),
               (t.getCookie = function (t) {
-                if (!t)
-                  throw new Error(
-                    r.LogPrefix + ": getCookie is missing cookieName"
-                  );
+                if (!t) throw new Error(r.LogPrefix + ": getCookie is missing cookieName");
                 var e = document.cookie.split(";").reduce(function (t, e) {
                   var n = e.split("=").map(function (t) {
                       return t.trim();
@@ -2853,17 +2481,10 @@
                 return r.hasOwnPropertyCi(e, t) ? e[t] : void 0;
               }),
               (t.convertCookieOptionsToString = function (t) {
-                if (!t)
-                  throw new Error(
-                    r.LogPrefix +
-                      ": convertCookieOptionsToString is missing options"
-                  );
+                if (!t) throw new Error(r.LogPrefix + ": convertCookieOptionsToString is missing options");
                 var e = "";
                 for (var n in t)
-                  r.hasOwnPropertyCi(t, n) &&
-                    ("secure" === n && t[n]
-                      ? (e += ";" + n)
-                      : (e += ";" + n + "=" + t[n]));
+                  r.hasOwnPropertyCi(t, n) && ("secure" === n && t[n] ? (e += ";" + n) : (e += ";" + n + "=" + t[n]));
                 return r.hasOwnPropertyCi(t, "path") || (e += ";path=/"), e;
               }),
               t
@@ -2932,25 +2553,17 @@
               function c(o) {
                 return function (c) {
                   return (function (o) {
-                    if (n)
-                      throw new TypeError("Generator is already executing.");
+                    if (n) throw new TypeError("Generator is already executing.");
                     for (; a; )
                       try {
                         if (
                           ((n = 1),
                           r &&
-                            (i =
-                              2 & o[0]
-                                ? r.return
-                                : o[0]
-                                ? r.throw || ((i = r.return) && i.call(r), 0)
-                                : r.next) &&
+                            (i = 2 & o[0] ? r.return : o[0] ? r.throw || ((i = r.return) && i.call(r), 0) : r.next) &&
                             !(i = i.call(r, o[1])).done)
                         )
                           return i;
-                        switch (
-                          ((r = 0), i && (o = [2 & o[0], i.value]), o[0])
-                        ) {
+                        switch (((r = 0), i && (o = [2 & o[0], i.value]), o[0])) {
                           case 0:
                           case 1:
                             i = o;
@@ -2964,18 +2577,11 @@
                             (o = a.ops.pop()), a.trys.pop();
                             continue;
                           default:
-                            if (
-                              !((i = a.trys),
-                              (i = i.length > 0 && i[i.length - 1]) ||
-                                (6 !== o[0] && 2 !== o[0]))
-                            ) {
+                            if (!((i = a.trys), (i = i.length > 0 && i[i.length - 1]) || (6 !== o[0] && 2 !== o[0]))) {
                               a = 0;
                               continue;
                             }
-                            if (
-                              3 === o[0] &&
-                              (!i || (o[1] > i[0] && o[1] < i[3]))
-                            ) {
+                            if (3 === o[0] && (!i || (o[1] > i[0] && o[1] < i[3]))) {
                               a.label = o[1];
                               break;
                             }
@@ -3011,9 +2617,7 @@
                 2,
                 new Promise(function (t, e) {
                   "undefined" == typeof document && e(),
-                    ("complete" !== document.readyState &&
-                      "interactive" !== document.readyState) ||
-                      t(),
+                    ("complete" !== document.readyState && "interactive" !== document.readyState) || t(),
                     document.addEventListener("DOMContentLoaded", function () {
                       return t();
                     });
@@ -3031,12 +2635,7 @@
                     2,
                     new Promise(function (t) {
                       var e = function () {
-                        t(),
-                          document.removeEventListener(
-                            "visibilitychange",
-                            e,
-                            !1
-                          );
+                        t(), document.removeEventListener("visibilitychange", e, !1);
                       };
                       document.addEventListener("visibilitychange", e, !1);
                     }),
@@ -3117,10 +2716,7 @@
               if (t && t.__esModule) return t;
               var e = {};
               if (null != t)
-                for (var n in t)
-                  "default" !== n &&
-                    Object.prototype.hasOwnProperty.call(t, n) &&
-                    r(e, t, n);
+                for (var n in t) "default" !== n && Object.prototype.hasOwnProperty.call(t, n) && r(e, t, n);
               return i(e, t), e;
             },
           a =
@@ -3129,12 +2725,7 @@
               return t && t.__esModule ? t : { default: t };
             };
         Object.defineProperty(e, "__esModule", { value: !0 }),
-          (e.utilities =
-            e.twclid =
-            e.fetch =
-            e.environment =
-            e.Cookies =
-              void 0);
+          (e.utilities = e.twclid = e.fetch = e.environment = e.Cookies = void 0);
         var c = n(6575);
         Object.defineProperty(e, "Cookies", {
           enumerable: !0,
@@ -3212,25 +2803,17 @@
               function c(o) {
                 return function (c) {
                   return (function (o) {
-                    if (n)
-                      throw new TypeError("Generator is already executing.");
+                    if (n) throw new TypeError("Generator is already executing.");
                     for (; a; )
                       try {
                         if (
                           ((n = 1),
                           r &&
-                            (i =
-                              2 & o[0]
-                                ? r.return
-                                : o[0]
-                                ? r.throw || ((i = r.return) && i.call(r), 0)
-                                : r.next) &&
+                            (i = 2 & o[0] ? r.return : o[0] ? r.throw || ((i = r.return) && i.call(r), 0) : r.next) &&
                             !(i = i.call(r, o[1])).done)
                         )
                           return i;
-                        switch (
-                          ((r = 0), i && (o = [2 & o[0], i.value]), o[0])
-                        ) {
+                        switch (((r = 0), i && (o = [2 & o[0], i.value]), o[0])) {
                           case 0:
                           case 1:
                             i = o;
@@ -3244,18 +2827,11 @@
                             (o = a.ops.pop()), a.trys.pop();
                             continue;
                           default:
-                            if (
-                              !((i = a.trys),
-                              (i = i.length > 0 && i[i.length - 1]) ||
-                                (6 !== o[0] && 2 !== o[0]))
-                            ) {
+                            if (!((i = a.trys), (i = i.length > 0 && i[i.length - 1]) || (6 !== o[0] && 2 !== o[0]))) {
                               a = 0;
                               continue;
                             }
-                            if (
-                              3 === o[0] &&
-                              (!i || (o[1] > i[0] && o[1] < i[3]))
-                            ) {
+                            if (3 === o[0] && (!i || (o[1] > i[0] && o[1] < i[3]))) {
                               a.label = o[1];
                               break;
                             }
@@ -3313,8 +2889,7 @@
         })((a = e.TWCLIDSource || (e.TWCLIDSource = {}))),
           (e.TWCLID_COOKIE_NAME = "_twclid"),
           (e.TWCLID_COOKIE_TTL = 2592e3),
-          (e.ACC_BASE =
-            "https://ads-api.twitter.com/measurement/website_tag_settings?version=2.3.30"),
+          (e.ACC_BASE = "https://ads-api.twitter.com/measurement/website_tag_settings?version=2.3.30"),
           (e.TWCLID_QUERY_PARAM = "twclid"),
           (e.AccRequestCache = {});
         e.cacheAccRequest = function (t, n) {
@@ -3334,10 +2909,7 @@
                         [
                           2,
                           !0 ===
-                            (null === (r = null == e ? void 0 : e.data) ||
-                            void 0 === r
-                              ? void 0
-                              : r.allow_1p_cookie),
+                            (null === (r = null == e ? void 0 : e.data) || void 0 === r ? void 0 : r.allow_1p_cookie),
                         ]
                       );
                     case 3:
@@ -3355,11 +2927,7 @@
         };
         e.getTwclidFromCookie = function () {
           try {
-            return JSON.parse(
-              decodeURIComponent(
-                c.Cookies.getCookie(e.TWCLID_COOKIE_NAME) || ""
-              )
-            ).twclid;
+            return JSON.parse(decodeURIComponent(c.Cookies.getCookie(e.TWCLID_COOKIE_NAME) || "")).twclid;
           } catch (t) {
             return;
           }
@@ -3384,13 +2952,9 @@
             return i(this, function (r) {
               switch (r.label) {
                 case 0:
-                  return (n = e.getTwclidFromHref())
-                    ? [2, { twclid: n, source: a.Href }]
-                    : [4, e.AccRequestCache[t]];
+                  return (n = e.getTwclidFromHref()) ? [2, { twclid: n, source: a.Href }] : [4, e.AccRequestCache[t]];
                 case 1:
-                  return r.sent() && (n = e.getTwclidFromCookie())
-                    ? [2, { twclid: n, source: a.Cookie }]
-                    : [2];
+                  return r.sent() && (n = e.getTwclidFromCookie()) ? [2, { twclid: n, source: a.Cookie }] : [2];
               }
             });
           });
@@ -3416,11 +2980,7 @@
           return void 0 !== e.AccRequestCache[t];
         };
         e.requestAccIfNeeded = function (t) {
-          if (
-            !e.isAccCached(t) &&
-            !e.getTwclidFromHref() &&
-            e.getTwclidFromCookie()
-          ) {
+          if (!e.isAccCached(t) && !e.getTwclidFromHref() && e.getTwclidFromCookie()) {
             var n = new URL(e.ACC_BASE);
             n.searchParams.set("txn_id", t);
             var r = u.default(n.toString());
@@ -3433,9 +2993,7 @@
             return i(this, function (i) {
               switch (i.label) {
                 case 0:
-                  return (n = e.getTwclidFromHref())
-                    ? [4, e.AccRequestCache[t]]
-                    : [2];
+                  return (n = e.getTwclidFromHref()) ? [4, e.AccRequestCache[t]] : [2];
                 case 1:
                   if (!i.sent()) return [2];
                   if (((r = e.getTwclidFromCookie()), n === r)) return [2];
@@ -3451,16 +3009,12 @@
                       f = u;
                     l < f.length &&
                     ((d = f[l]),
-                    c.Cookies.setCookie(
-                      e.TWCLID_COOKIE_NAME,
-                      JSON.stringify(o),
-                      {
-                        domain: d,
-                        "max-age": e.TWCLID_COOKIE_TTL,
-                        secure: !0,
-                        samesite: "Strict",
-                      }
-                    ),
+                    c.Cookies.setCookie(e.TWCLID_COOKIE_NAME, JSON.stringify(o), {
+                      domain: d,
+                      "max-age": e.TWCLID_COOKIE_TTL,
+                      secure: !0,
+                      samesite: "Strict",
+                    }),
                     !c.Cookies.getCookie(e.TWCLID_COOKIE_NAME));
                     l++
                   );
@@ -3479,9 +3033,7 @@
                 Object.assign ||
                 function (t) {
                   for (var e, n = 1, r = arguments.length; n < r; n++)
-                    for (var i in (e = arguments[n]))
-                      Object.prototype.hasOwnProperty.call(e, i) &&
-                        (t[i] = e[i]);
+                    for (var i in (e = arguments[n])) Object.prototype.hasOwnProperty.call(e, i) && (t[i] = e[i]);
                   return t;
                 }).apply(this, arguments);
             },
@@ -3561,8 +3113,7 @@
           });
         function c(t, e) {
           var n = e.toLowerCase();
-          for (var r in t)
-            if (r.toLowerCase() === n && t.hasOwnProperty(r)) return t[r];
+          for (var r in t) if (r.toLowerCase() === n && t.hasOwnProperty(r)) return t[r];
         }
         (e.getLegacyParams = function (t) {
           if (!s(t)) return {};
@@ -3575,19 +3126,14 @@
             delete t.tw_order_quantity,
             u(t, "value") && (e.tw_sale_amount = c(t, "value")),
             u(t, "num_items") && (e.tw_order_quantity = c(t, "num_items")),
-            Array.isArray(c(t, "content_ids")) &&
-              (e.tw_product_id = c(t, "content_ids")[0]),
+            Array.isArray(c(t, "content_ids")) && (e.tw_product_id = c(t, "content_ids")[0]),
             u(t, "partner_id") && (e.oct_p_id = c(t, "partner_id")),
             e
           );
         }),
           (e.getPropertyCi = c);
         e.getWildcardDomains = function () {
-          for (
-            var t = location.hostname.split("."), e = [], n = 2;
-            n <= t.length;
-            n++
-          )
+          for (var t = location.hostname.split("."), e = [], n = 2; n <= t.length; n++)
             e.push("." + t.slice(-1 * n).join("."));
           return e;
         };
@@ -3596,8 +3142,7 @@
         };
         function u(t, e) {
           var n = e.toLowerCase();
-          for (var r in t)
-            if (r.toLowerCase() === n && t.hasOwnProperty(r)) return !0;
+          for (var r in t) if (r.toLowerCase() === n && t.hasOwnProperty(r)) return !0;
           return !1;
         }
         function s(t) {
@@ -3622,8 +3167,7 @@
           (e.isObject = s),
           (e.logError = function (t) {}),
           (e.mergeObjects = function () {
-            for (var t = [], e = 0; e < arguments.length; e++)
-              t[e] = arguments[e];
+            for (var t = [], e = 0; e < arguments.length; e++) t[e] = arguments[e];
             var n = t[0],
               r = t.slice(1);
             return (
@@ -3639,9 +3183,7 @@
           (e.parseEventCodeId = function (t) {
             if ("string" != typeof t) return ["", t];
             var e = t.toLowerCase().split("-");
-            return 3 !== e.length || "tw" !== e[0] || "" === e[1] || "" === e[2]
-              ? ["", t]
-              : [e[1], e[2]];
+            return 3 !== e.length || "tw" !== e[0] || "" === e[1] || "" === e[2] ? ["", t] : [e[1], e[2]];
           }),
           (e.splitObjectBy = l),
           (e.splitObjectByPropNames = function (t, e) {
@@ -3660,10 +3202,7 @@
     return t[r].call(o.exports, o, o.exports, n), o.exports;
   }
   (n.d = function (t, e) {
-    for (var r in e)
-      n.o(e, r) &&
-        !n.o(t, r) &&
-        Object.defineProperty(t, r, { enumerable: !0, get: e[r] });
+    for (var r in e) n.o(e, r) && !n.o(t, r) && Object.defineProperty(t, r, { enumerable: !0, get: e[r] });
   }),
     (n.g = (function () {
       if ("object" == typeof globalThis) return globalThis;

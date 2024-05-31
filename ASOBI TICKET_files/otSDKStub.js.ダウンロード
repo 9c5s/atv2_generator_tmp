@@ -138,9 +138,7 @@ var OneTrustStub = (function (t) {
   function l(t, e, i) {
     void 0 === i && (i = !1);
     function n(t) {
-      return t
-        ? (";" !== (t = t.trim()).charAt(t.length - 1) && (t += ";"), t.trim())
-        : null;
+      return t ? (";" !== (t = t.trim()).charAt(t.length - 1) && (t += ";"), t.trim()) : null;
     }
     var o = n(t.getAttribute("style")),
       s = n(e),
@@ -190,19 +188,14 @@ var OneTrustStub = (function (t) {
         }),
         (this.removeGppApi = function () {
           delete s.win.__gpp;
-          var t = document.querySelectorAll(
-            "iframe[name=" + s.LOCATOR_NAME + "]"
-          )[0];
+          var t = document.querySelectorAll("iframe[name=" + s.LOCATOR_NAME + "]")[0];
           t && t.parentElement.removeChild(t);
         }),
         (this.executeGppApi = function () {
-          for (var t = [], e = 0; e < arguments.length; e++)
-            t[e] = arguments[e];
+          for (var t = [], e = 0; e < arguments.length; e++) t[e] = arguments[e];
           var i = null == (i = s.win) ? void 0 : i.__gpp;
           if (
-            ((i.queue = i.queue || []),
-            (i.events = i.events || []),
-            !t.length || (1 === t.length && "queue" === t[0]))
+            ((i.queue = i.queue || []), (i.events = i.events || []), !t.length || (1 === t.length && "queue" === t[0]))
           )
             return i.queue;
           if (1 === t.length && "events" === t[0]) return i.events;
@@ -263,8 +256,7 @@ var OneTrustStub = (function (t) {
           return (
             n ||
               (i.body
-                ? (((e = i.createElement("iframe")).style.cssText =
-                    "display:none"),
+                ? (((e = i.createElement("iframe")).style.cssText = "display:none"),
                   (e.name = t),
                   e.setAttribute("title", "GPP Locator"),
                   i.body.appendChild(e))
@@ -331,10 +323,7 @@ var OneTrustStub = (function (t) {
                 i &&
                   i.source &&
                   i.source.postMessage &&
-                  i.source.postMessage(
-                    a ? JSON.stringify(t) : t,
-                    i.origin || "*"
-                  );
+                  i.source.postMessage(a ? JSON.stringify(t) : t, i.origin || "*");
               },
               n.parameter
             ));
@@ -352,17 +341,12 @@ var OneTrustStub = (function (t) {
           this.captureNonce();
       }),
       (h.prototype.captureNonce = function () {
-        this.nonce =
-          p.stubScriptElement.nonce ||
-          p.stubScriptElement.getAttribute("nonce") ||
-          null;
+        this.nonce = p.stubScriptElement.nonce || p.stubScriptElement.getAttribute("nonce") || null;
       }),
       (h.prototype.fetchBannerSDKDependency = function () {
         this.setDomainDataFileURL(),
-          (this.crossOrigin =
-            p.stubScriptElement.getAttribute("crossorigin") || null),
-          (this.previewMode =
-            "true" === p.stubScriptElement.getAttribute("data-preview-mode")),
+          (this.crossOrigin = p.stubScriptElement.getAttribute("crossorigin") || null),
+          (this.previewMode = "true" === p.stubScriptElement.getAttribute("data-preview-mode")),
           this.otFetch(p.bannerDataParentURL, this.getLocation.bind(this));
       }),
       (h.prototype.setDomainIfBulkDomainEnabled = function (t) {
@@ -377,9 +361,7 @@ var OneTrustStub = (function (t) {
           ((e = window.sessionStorage) && e.getItem("bulkDomainMgmtEnabled")
             ? this.handleBulkDomainMgmt(
                 {
-                  isValid:
-                    "true" ===
-                    window.sessionStorage.getItem("bulkDomainMgmtEnabled"),
+                  isValid: "true" === window.sessionStorage.getItem("bulkDomainMgmtEnabled"),
                 },
                 t
               )
@@ -394,11 +376,9 @@ var OneTrustStub = (function (t) {
         if (
           (this.setDomainIfBulkDomainEnabled(t),
           this.updateVersion(t),
-          ((t.TenantFeatures && t.TenantFeatures.CookieV2CSP) ||
-            t.CookieV2CSPEnabled) &&
+          ((t.TenantFeatures && t.TenantFeatures.CookieV2CSP) || t.CookieV2CSPEnabled) &&
             this.nonce &&
-            ((this.setAttributePolyfillIsActive = !0),
-            new n().implementThePolyfill()),
+            ((this.setAttributePolyfillIsActive = !0), new n().implementThePolyfill()),
           !t.RuleSet[0].Type)
         )
           return (
@@ -413,30 +393,17 @@ var OneTrustStub = (function (t) {
           ? ((i = i.OneTrust.geolocationResponse),
             this.setGeoLocation(i.countryCode, i.stateCode),
             this.addBannerSDKScript(t))
-          : (i = this.readCookieParam(
-              p.optanonCookieName,
-              p.geolocationCookiesParam
-            )) || t.SkipGeolocation
-          ? ((e = i.split(";")[0]),
-            (i = i.split(";")[1]),
-            this.setGeoLocation(e, i),
-            this.addBannerSDKScript(t))
+          : (i = this.readCookieParam(p.optanonCookieName, p.geolocationCookiesParam)) || t.SkipGeolocation
+          ? ((e = i.split(";")[0]), (i = i.split(";")[1]), this.setGeoLocation(e, i), this.addBannerSDKScript(t))
           : this.getGeoLocation(t);
       }),
       (h.prototype.handleBulkDomainMgmt = function (t, e) {
-        window.sessionStorage &&
-          window.sessionStorage.setItem(
-            "bulkDomainMgmtEnabled",
-            JSON.stringify(t.isValid)
-          ),
+        window.sessionStorage && window.sessionStorage.setItem("bulkDomainMgmtEnabled", JSON.stringify(t.isValid)),
           t.isValid && (e.Domain = window.location.hostname);
       }),
       (h.prototype.getGeolocationURL = function (t) {
         t.TenantFeatures;
-        var e =
-          "" +
-          p.stubScriptElement.getAttribute("src").split(p.stubFileName)[0] +
-          t.Version;
+        var e = "" + p.stubScriptElement.getAttribute("src").split(p.stubFileName)[0] + t.Version;
         return new RegExp("^file://", "i").test(e) && t.MobileSDK
           ? ((e =
               "/" +
@@ -449,8 +416,7 @@ var OneTrustStub = (function (t) {
           : t.GeolocationUrl;
       }),
       (h.prototype.geoLocationJsonCallback = function (t, e) {
-        e && this.setGeoLocation(e.country, e.state),
-          this.addBannerSDKScript(t);
+        e && this.setGeoLocation(e.country, e.state), this.addBannerSDKScript(t);
       }),
       (h.prototype.getGeoLocation = function (t) {
         var e = this.getGeolocationURL(t);
@@ -462,8 +428,7 @@ var OneTrustStub = (function (t) {
           t = p.stubScriptElement.getAttribute(t);
         this.otDataLayer = {
           ignore: (e && "true" === t) || (e && "" === t),
-          name:
-            p.stubScriptElement.getAttribute("data-dLayer-name") || "dataLayer",
+          name: p.stubScriptElement.getAttribute("data-dLayer-name") || "dataLayer",
         };
       }),
       (h.prototype.setGeoLocation = function (t, e) {
@@ -471,9 +436,7 @@ var OneTrustStub = (function (t) {
       }),
       (h.prototype.otFetch = function (t, i, e, n, a) {
         void 0 === e && (e = !1), void 0 === n && (n = null);
-        var o =
-          window.sessionStorage &&
-          window.sessionStorage.getItem("otPreviewData");
+        var o = window.sessionStorage && window.sessionStorage.getItem("otPreviewData");
         if (new RegExp("^file://", "i").test(t)) this.otFetchOfflineFile(t, i);
         else if (0 <= t.indexOf("/consent/") && this.previewMode && o) {
           o = JSON.parse(o).domainJson;
@@ -484,9 +447,7 @@ var OneTrustStub = (function (t) {
           if (
             ((s.onload = function (t) {
               var e;
-              this && this.responseText
-                ? (e = this.responseText)
-                : t && t.target && (e = t.target.responseText),
+              this && this.responseText ? (e = this.responseText) : t && t.target && (e = t.target.responseText),
                 a ? i(JSON.parse(e), a) : i(JSON.parse(e));
             }),
             (s.onerror = function () {
@@ -532,11 +493,7 @@ var OneTrustStub = (function (t) {
             return !0 === t.Default;
           });
         if (!a.country && !a.state) return o && 0 < o.length ? o[0] : null;
-        for (
-          var s = a.state.toLowerCase(), r = a.country.toLowerCase(), u = 0;
-          u < t.RuleSet.length;
-          u++
-        )
+        for (var s = a.state.toLowerCase(), r = a.country.toLowerCase(), u = 0; u < t.RuleSet.length; u++)
           if (!0 === t.RuleSet[u].Global) n = t.RuleSet[u];
           else {
             var l = t.RuleSet[u].States;
@@ -549,10 +506,7 @@ var OneTrustStub = (function (t) {
         return i || e || n;
       }),
       (h.prototype.ensureHtmlGroupDataInitialised = function () {
-        this.initializeIABData(),
-          this.initializeGroupData(),
-          this.initializeHostData(),
-          this.initializeGenVenData();
+        this.initializeIABData(), this.initializeGroupData(), this.initializeHostData(), this.initializeGenVenData();
       }),
       (h.prototype.initializeGroupData = function () {
         var t = this.readCookieParam(p.optanonCookieName, "groups");
@@ -570,22 +524,15 @@ var OneTrustStub = (function (t) {
         this.validateIABGDPRApplied(), this.validateIABGlobalScope();
       }),
       (h.prototype.validateIABGlobalScope = function () {
-        var t = this.readCookieParam(
-          p.optanonCookieName,
-          p.oneTrustIsIABCrossConsentEnableParam
-        );
+        var t = this.readCookieParam(p.optanonCookieName, p.oneTrustIsIABCrossConsentEnableParam);
         t
           ? "true" === t
             ? ((p.hasIABGlobalScope = !0), (p.isStubReady = !1))
-            : ((p.hasIABGlobalScope = !1),
-              (p.IABCookieValue = this.getCookie(p.oneTrustIABCookieName)))
+            : ((p.hasIABGlobalScope = !1), (p.IABCookieValue = this.getCookie(p.oneTrustIABCookieName)))
           : (p.isStubReady = !1);
       }),
       (h.prototype.validateIABGDPRApplied = function () {
-        var t = this.readCookieParam(
-          p.optanonCookieName,
-          p.geolocationCookiesParam
-        ).split(";")[0];
+        var t = this.readCookieParam(p.optanonCookieName, p.geolocationCookiesParam).split(";")[0];
         t
           ? this.isBoolean(t)
             ? (p.oneTrustIABgdprAppliesGlobally = "true" === t)
@@ -603,11 +550,7 @@ var OneTrustStub = (function (t) {
           t = this.getCookie(t);
         if (t) {
           for (n = {}, a = t.split("&"), i = 0; i < a.length; i += 1)
-            (o = a[i].split("=")),
-              (n[decodeURIComponent(o[0])] = decodeURIComponent(o[1]).replace(
-                /\+/g,
-                " "
-              ));
+            (o = a[i].split("=")), (n[decodeURIComponent(o[0])] = decodeURIComponent(o[1]).replace(/\+/g, " "));
           return e && n[e] ? n[e] : e && !n[e] ? "" : n;
         }
         return "";
@@ -617,11 +560,7 @@ var OneTrustStub = (function (t) {
           var e = JSON.parse(window.localStorage.getItem(this.domainId)) || {};
           if (e) return e[t] || null;
         }
-        for (
-          var i, n = t + "=", a = document.cookie.split(";"), o = 0;
-          o < a.length;
-          o += 1
-        ) {
+        for (var i, n = t + "=", a = document.cookie.split(";"), o = 0; o < a.length; o += 1) {
           for (i = a[o]; " " == i.charAt(0); ) i = i.substring(1, i.length);
           if (0 == i.indexOf(n)) return i.substring(n.length, i.length);
         }
@@ -629,23 +568,16 @@ var OneTrustStub = (function (t) {
       }),
       (h.prototype.updateGtmMacros = function () {
         for (var t = [], e = p.optanonHtmlGroupData.length, i = 0; i < e; i++)
-          this.endsWith(p.optanonHtmlGroupData[i], ":1") &&
-            t.push(p.optanonHtmlGroupData[i].replace(":1", ""));
+          this.endsWith(p.optanonHtmlGroupData[i], ":1") && t.push(p.optanonHtmlGroupData[i].replace(":1", ""));
         for (e = p.optanonHostData.length, i = 0; i < e; i++)
-          this.endsWith(p.optanonHostData[i], ":1") &&
-            t.push(p.optanonHostData[i].replace(":1", ""));
+          this.endsWith(p.optanonHostData[i], ":1") && t.push(p.optanonHostData[i].replace(":1", ""));
         for (e = p.genVendorsData.length, i = 0; i < e; i++)
-          this.endsWith(p.genVendorsData[i], ":1") &&
-            t.push(p.genVendorsData[i].replace(":1", ""));
+          this.endsWith(p.genVendorsData[i], ":1") && t.push(p.genVendorsData[i].replace(":1", ""));
         for (e = p.vendorsServiceData.length, i = 0; i < e; i++)
-          this.endsWith(p.vendorsServiceData[i], ":1") &&
-            t.push(p.vendorsServiceData[i].replace(":1", ""));
+          this.endsWith(p.vendorsServiceData[i], ":1") && t.push(p.vendorsServiceData[i].replace(":1", ""));
         var n,
           a = "," + this.serialiseArrayToString(t) + ",",
-          o =
-            ((window.OnetrustActiveGroups = a),
-            (window.OptanonActiveGroups = a),
-            window),
+          o = ((window.OnetrustActiveGroups = a), (window.OptanonActiveGroups = a), window),
           s =
             (this.otDataLayer.ignore || void 0 === o[this.otDataLayer.name]
               ? this.otDataLayer.ignore ||
@@ -679,30 +611,19 @@ var OneTrustStub = (function (t) {
         return t.toString();
       }),
       (h.prototype.getStubQueryParam = function (t, e) {
-        return !t || (t = t.split("?")).length < 2
-          ? null
-          : new URLSearchParams(t[1]).get(e);
+        return !t || (t = t.split("?")).length < 2 ? null : new URLSearchParams(t[1]).get(e);
       }),
       (h.prototype.setStubScriptElement = function () {
-        p.stubScriptElement = document.querySelector(
-          "script[src*='" + p.stubFileName + "']"
-        );
+        p.stubScriptElement = document.querySelector("script[src*='" + p.stubFileName + "']");
         var t = p.stubScriptElement && p.stubScriptElement.getAttribute("src"),
           t = t && this.getStubQueryParam(t, "did");
-        p.stubScriptElement &&
-        p.stubScriptElement.hasAttribute(p.DATAFILEATTRIBUTE)
-          ? (this.domainId = p.stubScriptElement
-              .getAttribute(p.DATAFILEATTRIBUTE)
-              .trim())
+        p.stubScriptElement && p.stubScriptElement.hasAttribute(p.DATAFILEATTRIBUTE)
+          ? (this.domainId = p.stubScriptElement.getAttribute(p.DATAFILEATTRIBUTE).trim())
           : t
           ? (this.domainId = t)
           : p.stubScriptElement ||
-            ((p.stubScriptElement = document.querySelector(
-              "script[src*='" + p.migratedCCTID + "']"
-            )),
-            p.stubScriptElement &&
-              ((p.isMigratedURL = !0),
-              (this.domainId = p.migratedDomainId.trim())));
+            ((p.stubScriptElement = document.querySelector("script[src*='" + p.migratedCCTID + "']")),
+            p.stubScriptElement && ((p.isMigratedURL = !0), (this.domainId = p.migratedDomainId.trim())));
       }),
       (h.prototype.setDomainDataFileURL = function () {
         var t = p.stubScriptElement.getAttribute("src"),
@@ -710,19 +631,13 @@ var OneTrustStub = (function (t) {
         t &&
           (p.isMigratedURL
             ? (p.storageBaseURL = t.split("/consent/" + p.migratedCCTID)[0])
-            : (p.storageBaseURL = (
-                e
-                  ? t.split("/consent")
-                  : t.split("/scripttemplates/" + p.stubFileName)
-              )[0])),
+            : (p.storageBaseURL = (e ? t.split("/consent") : t.split("/scripttemplates/" + p.stubFileName))[0])),
           (this.storageBaseURL = p.storageBaseURL),
           this.isPreview && -1 === this.domainId.indexOf("test")
             ? (this.domainId = this.domainId + "-test")
             : (this.isPreview = !1),
-          (p.bannerBaseDataURL =
-            p.storageBaseURL && p.storageBaseURL + "/consent/" + this.domainId),
-          (p.bannerDataParentURL =
-            p.bannerBaseDataURL + "/" + this.domainId + ".json");
+          (p.bannerBaseDataURL = p.storageBaseURL && p.storageBaseURL + "/consent/" + this.domainId),
+          (p.bannerDataParentURL = p.bannerBaseDataURL + "/" + this.domainId + ".json");
       }),
       (h.prototype.initCustomEventPolyfill = function () {
         if ("function" == typeof window.CustomEvent) return !1;
@@ -741,9 +656,7 @@ var OneTrustStub = (function (t) {
       (h.prototype.getParamForIE = function () {
         return {
           get: function (t) {
-            t = new RegExp("[?&]" + t + "=([^&#]*)").exec(
-              window.location.search
-            );
+            t = new RegExp("[?&]" + t + "=([^&#]*)").exec(window.location.search);
             return null === t ? null : decodeURI(t[1]) || "";
           },
         };
@@ -755,14 +668,10 @@ var OneTrustStub = (function (t) {
         var t = "true" === this.urlParams.get("otreset"),
           e = "true" === this.urlParams.get("otpreview"),
           i =
-            ((this.geoFromUrl = (
-              this.urlParams.get("otgeo") || ""
-            ).toLowerCase()),
-            this.readCookieParam(r, "expiry")),
+            ((this.geoFromUrl = (this.urlParams.get("otgeo") || "").toLowerCase()), this.readCookieParam(r, "expiry")),
           n = this.readCookieParam(r, s);
         (this.isReset = t || (i && new Date(i) < new Date())),
-          (this.isPreview =
-            !this.isReset && (e || (i && new Date(i) > new Date()))),
+          (this.isPreview = !this.isReset && (e || (i && new Date(i) > new Date()))),
           this.setGeoParam(this.geoFromUrl || n);
       }),
       (h.prototype.setGeoParam = function (t) {
@@ -776,8 +685,7 @@ var OneTrustStub = (function (t) {
           }));
       }),
       (h.prototype.updateVersion = function (t) {
-        ("debug" !== this.buildType && "cybuild" !== this.buildType) ||
-          (t.Version = "202405.2.0");
+        ("debug" !== this.buildType && "cybuild" !== this.buildType) || (t.Version = "202405.2.0");
       }),
       h);
   function h() {
@@ -800,8 +708,7 @@ var OneTrustStub = (function (t) {
           i =
             (e.GCEnable || (s.updateGtmMacros(), (s.gtmUpdated = !0)),
             s.iabTypeAdded &&
-              (("IAB2" !== e.Type && "IAB2V2" !== e.Type) ||
-                ((s.iabType = e.Type), s.intializeIabStub()),
+              (("IAB2" !== e.Type && "IAB2V2" !== e.Type) || ((s.iabType = e.Type), s.intializeIabStub()),
               "IAB2" !== e.Type) &&
               "IAB2V2" !== e.Type &&
               s.removeTcf(),
@@ -810,37 +717,14 @@ var OneTrustStub = (function (t) {
           n = "",
           n = t.UseSDKRefactor
             ? (p.isMigratedURL &&
-                (i.src =
-                  p.storageBaseURL +
-                  "/scripttemplates/new/scripttemplates/" +
-                  p.stubFileName +
-                  ".js"),
-              p.storageBaseURL +
-                "/scripttemplates/new/scripttemplates/" +
-                t.Version +
-                "/" +
-                p.bannerScriptName)
+                (i.src = p.storageBaseURL + "/scripttemplates/new/scripttemplates/" + p.stubFileName + ".js"),
+              p.storageBaseURL + "/scripttemplates/new/scripttemplates/" + t.Version + "/" + p.bannerScriptName)
             : "5.11.0" === t.Version
             ? (p.isMigratedURL &&
-                (i.src =
-                  p.storageBaseURL +
-                  "/scripttemplates/old/scripttemplates/" +
-                  p.stubFileName +
-                  ".js"),
-              p.storageBaseURL +
-                "/scripttemplates/old/scripttemplates/5.11.0/" +
-                p.bannerScriptName)
-            : (p.isMigratedURL &&
-                (i.src =
-                  p.storageBaseURL +
-                  "/scripttemplates/" +
-                  p.stubFileName +
-                  ".js"),
-              p.storageBaseURL +
-                "/scripttemplates/" +
-                t.Version +
-                "/" +
-                p.bannerScriptName);
+                (i.src = p.storageBaseURL + "/scripttemplates/old/scripttemplates/" + p.stubFileName + ".js"),
+              p.storageBaseURL + "/scripttemplates/old/scripttemplates/5.11.0/" + p.bannerScriptName)
+            : (p.isMigratedURL && (i.src = p.storageBaseURL + "/scripttemplates/" + p.stubFileName + ".js"),
+              p.storageBaseURL + "/scripttemplates/" + t.Version + "/" + p.bannerScriptName);
         [
           "charset",
           "data-language",
@@ -849,8 +733,7 @@ var OneTrustStub = (function (t) {
           "crossorigin",
           "data-ignore-ga",
         ].forEach(function (t) {
-          p.stubScriptElement.getAttribute(t) &&
-            i.setAttribute(t, p.stubScriptElement.getAttribute(t));
+          p.stubScriptElement.getAttribute(t) && i.setAttribute(t, p.stubScriptElement.getAttribute(t));
         }),
           (s.charset = p.stubScriptElement.getAttribute("charset")),
           (s.isAmp = !!p.stubScriptElement.getAttribute("amp")),
@@ -882,31 +765,20 @@ var OneTrustStub = (function (t) {
       (this.intializeIabStub = function () {
         var t = window;
         s.iabTypeAdded
-          ? (void 0 === t.__tcfapi && (window.__tcfapi = s.executeTcfApi),
-            s.addIabFrame())
+          ? (void 0 === t.__tcfapi && (window.__tcfapi = s.executeTcfApi), s.addIabFrame())
           : s.addBackwardIabFrame(),
           (t.receiveOTMessage = s.receiveIabMessage),
-          (t.attachEvent || window.addEventListener)(
-            "message",
-            t.receiveOTMessage,
-            !1
-          );
+          (t.attachEvent || window.addEventListener)("message", t.receiveOTMessage, !1);
       }),
       (this.addIabFrame = function () {
         var t = window,
           e = "__tcfapiLocator";
-        !t.frames[e] &&
-          (t.document.body
-            ? s.addLocator(e, "CMP")
-            : setTimeout(s.addIabFrame, 5));
+        !t.frames[e] && (t.document.body ? s.addLocator(e, "CMP") : setTimeout(s.addIabFrame, 5));
       }),
       (this.addBackwardIabFrame = function () {
         var t = window,
           e = "__tcfapiLocator";
-        !t.frames[e] &&
-          (t.document.body
-            ? s.addLocator(e, "TCF")
-            : setTimeout(s.addIabFrame, 5));
+        !t.frames[e] && (t.document.body ? s.addLocator(e, "TCF") : setTimeout(s.addIabFrame, 5));
       }),
       (this.addLocator = function (t, e) {
         var i = window,
@@ -927,9 +799,7 @@ var OneTrustStub = (function (t) {
         } catch (t) {}
         e.__cmpCall &&
           "IAB2" === s.iabType &&
-          console.log(
-            "Expecting IAB TCF v2.0 vendor iFrame call; Received IAB TCF v1.1"
-          ),
+          console.log("Expecting IAB TCF v2.0 vendor iFrame call; Received IAB TCF v1.1"),
           e.__tcfapiCall &&
             "IAB2" === s.iabType &&
             ((n = e.__tcfapiCall.callId),
@@ -948,10 +818,7 @@ var OneTrustStub = (function (t) {
                     command: a,
                   },
                 };
-                i &&
-                  i.source &&
-                  i.source.postMessage &&
-                  i.source.postMessage(o ? JSON.stringify(t) : t, "*");
+                i && i.source && i.source.postMessage && i.source.postMessage(o ? JSON.stringify(t) : t, "*");
               },
               e
             ));
@@ -963,9 +830,7 @@ var OneTrustStub = (function (t) {
           n = t[1],
           a = t[2],
           o = t[3];
-        "function" == typeof a &&
-          i &&
-          ("ping" === i ? s.getPingRequest(a) : s.addToQueue(i, n, a, o));
+        "function" == typeof a && i && ("ping" === i ? s.getPingRequest(a) : s.addToQueue(i, n, a, o));
       }),
       (this.addToQueue = function (t, e, i, n) {
         var a = window,
