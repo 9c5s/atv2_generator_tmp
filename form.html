@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>フォーム</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        font-size: 18px;
+      }
+
+      form {
+        max-width: 70%;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+      }
+
+      label {
+        display: block;
+        margin: 10px 0 5px;
+        font-size: 18px;
+      }
+
+      input[type="text"],
+      input[type="date"],
+      input[type="file"],
+      input[type="submit"] {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 15px;
+        box-sizing: border-box;
+        font-size: 18px;
+      }
+
+      input[type="submit"] {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 18px;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #45a049;
+      }
+
+      @media (max-width: 600px) {
+        body {
+          margin: 10px;
+          font-size: 24px;
+        }
+
+        form {
+          padding: 10px;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="file"],
+        input[type="submit"] {
+          padding: 25px;
+          font-size: 24px;
+        }
+
+        label {
+          font-size: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <form id="userForm" action="ASOBI TICKET.html" method="GET" enctype="multipart/form-data">
+      <label for="lastname">姓:</label>
+      <input type="text" id="lastname" name="lastname" required />
+      <br />
+      <label for="firstname">名:</label>
+      <input type="text" id="firstname" name="firstname" required />
+      <br />
+      <label for="birthdate">生年月日:</label>
+      <input type="date" id="birthdate" name="birthdate" required />
+      <br />
+      <label for="managerNumber">管理番号:</label>
+      <input type="text" id="managerNumber" name="managerNumber" required />
+      <br />
+      <label for="qrCode">QRコード画像:</label>
+      <input type="file" id="qrCode" name="qrCode" accept="image/*" required />
+      <br />
+      <input type="submit" value="反映" />
+    </form>
+    <script>
+      document.getElementById("userForm").onsubmit = (e) => {
+        const fileInput = document.getElementById("qrCode");
+        if (fileInput.files.length > 0) {
+          const file = fileInput.files[0];
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            localStorage.setItem("qrCode", e.target.result);
+            document.getElementById("userForm").submit();
+          };
+          reader.readAsDataURL(file);
+          e.preventDefault();
+        }
+      };
+    </script>
+  </body>
+</html>
