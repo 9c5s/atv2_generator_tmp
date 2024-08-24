@@ -274,12 +274,7 @@ var OneTrustStub = (function (t) {
             (null != (i = n) && i.lastId) || (n.lastId = 0),
             n.lastId++,
             n.events.push({ id: n.lastId, callback: t, parameter: e }),
-            {
-              eventName: "listenerRegistered",
-              listenerId: n.lastId,
-              data: !0,
-              pingData: s.getPingRequest(),
-            }
+            { eventName: "listenerRegistered", listenerId: n.lastId, data: !0, pingData: s.getPingRequest() }
           );
         }),
         (this.removeEventListener = function (e) {
@@ -290,12 +285,7 @@ var OneTrustStub = (function (t) {
             (t.events = t.events.filter(function (t) {
               return t.id.toString() !== e.toString() || !(i = !0);
             })),
-            {
-              eventName: "listenerRemoved",
-              listenerId: e,
-              data: i,
-              pingData: s.getPingRequest(),
-            }
+            { eventName: "listenerRemoved", listenerId: e, data: i, pingData: s.getPingRequest() }
           );
         }),
         (this.addToQueue = function (t, e, i) {
@@ -317,9 +307,7 @@ var OneTrustStub = (function (t) {
             (0, s.win.__gpp)(
               n.command,
               function (t, e) {
-                t = {
-                  __gppReturn: { returnValue: t, success: e, callId: n.callId },
-                };
+                t = { __gppReturn: { returnValue: t, success: e, callId: n.callId } };
                 i &&
                   i.source &&
                   i.source.postMessage &&
@@ -360,16 +348,10 @@ var OneTrustStub = (function (t) {
           t.ScriptType === u &&
           ((e = window.sessionStorage) && e.getItem("bulkDomainMgmtEnabled")
             ? this.handleBulkDomainMgmt(
-                {
-                  isValid: "true" === window.sessionStorage.getItem("bulkDomainMgmtEnabled"),
-                },
+                { isValid: "true" === window.sessionStorage.getItem("bulkDomainMgmtEnabled") },
                 t
               )
-            : ((n = {
-                location: p.storageBaseURL.replace(/^https?:\/\//, ""),
-                domainId: this.domainId,
-                url: i,
-              }),
+            : ((n = { location: p.storageBaseURL.replace(/^https?:\/\//, ""), domainId: this.domainId, url: i }),
               this.otFetch(a, this.handleBulkDomainMgmt, !1, n, t)));
       }),
       (h.prototype.getLocation = function (t) {
@@ -592,10 +574,7 @@ var OneTrustStub = (function (t) {
         !this.otDataLayer.ignore &&
           t.length &&
           (o[this.otDataLayer.name].constructor === Array &&
-            o[this.otDataLayer.name].push({
-              event: "OneTrustGroupsUpdated",
-              OnetrustActiveGroups: a,
-            }),
+            o[this.otDataLayer.name].push({ event: "OneTrustGroupsUpdated", OnetrustActiveGroups: a }),
           (n = new CustomEvent("OneTrustGroupsUpdated", { detail: t }))),
           setTimeout(function () {
             t.length && window.dispatchEvent(s), n && window.dispatchEvent(n);
@@ -679,13 +658,10 @@ var OneTrustStub = (function (t) {
         t &&
           ((e = window).OneTrust || (e.OneTrust = {}),
           (t = t.split(",")),
-          (e.OneTrust.geolocationResponse = {
-            countryCode: t[0],
-            stateCode: t[1],
-          }));
+          (e.OneTrust.geolocationResponse = { countryCode: t[0], stateCode: t[1] }));
       }),
       (h.prototype.updateVersion = function (t) {
-        ("debug" !== this.buildType && "cybuild" !== this.buildType) || (t.Version = "202405.2.0");
+        ("debug" !== this.buildType && "cybuild" !== this.buildType) || (t.Version = "202408.1.0");
       }),
       h);
   function h() {
@@ -810,14 +786,7 @@ var OneTrustStub = (function (t) {
               a,
               t,
               function (t, e) {
-                t = {
-                  __tcfapiReturn: {
-                    returnValue: t,
-                    success: e,
-                    callId: n,
-                    command: a,
-                  },
-                };
+                t = { __tcfapiReturn: { returnValue: t, success: e, callId: n, command: a } };
                 i && i.source && i.source.postMessage && i.source.postMessage(o ? JSON.stringify(t) : t, "*");
               },
               e
