@@ -1,44 +1,96 @@
-function updateTime() {
+// ユーティリティ関数: パディング処理
+const pad = (num) => String(num).padStart(2, "0");
+
+// 現在時刻を更新する関数
+const updateTime = () => {
   const now = new Date();
-  const pad = (num) => ("0" + num).slice(-2);
-  document.querySelector(".year").textContent = now.getFullYear();
-  document.querySelector(".month").textContent = pad(now.getMonth() + 1);
-  document.querySelector(".day").textContent = pad(now.getDate());
-  document.querySelector(".hour.time-item").textContent = pad(now.getHours());
-  document.querySelector(".minute.time-item").textContent = pad(now.getMinutes());
-  document.querySelector(".second.time-item").textContent = pad(now.getSeconds());
-}
+  const selectors = {
+    year: ".year",
+    month: ".month",
+    day: ".day",
+    hour: ".hour.time-item",
+    minute: ".minute.time-item",
+    second: ".second.time-item",
+  };
 
-function formatDate(dateString) {
-  const [year, month, day] = dateString.split("-");
-  const formattedMonth = month.replace(/^0+/, "");
-  const formattedDay = day.replace(/^0+/, "");
-  return `${year}年${formattedMonth}月${formattedDay}日`;
-}
+  Object.entries(selectors).forEach(([key, selector]) => {
+    const element = document.querySelector(selector);
+    if (element) {
+      let value;
+      switch (key) {
+        case "year":
+          value = now.getFullYear();
+          break;
+        case "month":
+          value = pad(now.getMonth() + 1);
+          break;
+        case "day":
+          value = pad(now.getDate());
+          break;
+        case "hour":
+          value = pad(now.getHours());
+          break;
+        case "minute":
+          value = pad(now.getMinutes());
+          break;
+        case "second":
+          value = pad(now.getSeconds());
+          break;
+        default:
+          value = "";
+      }
+      element.textContent = value;
+    }
+  });
+};
 
+// 日付フォーマット関数
+const formatDate = (dateString) => {
+  if (!dateString) return "日付が無効です";
+  const [year, month, day] = dateString.split("-").map((part) => part.replace(/^0+/, ""));
+  return `${year}年${month}月${day}日`;
+};
+
+// localStorageからデータを取得し、ページに表示する関数
+const populateTicketData = () => {
+  const keys = ["openingtime", "showtime", "lastname", "firstname", "birthdate", "managerNumber", "qrCode"];
+  const data = keys.reduce((acc, key) => {
+    acc[key] = localStorage.getItem(key);
+    return acc;
+  }, {});
+
+  const { openingtime, showtime, lastname, firstname, birthdate, managerNumber, qrCode } = data;
+
+  // 要素が存在する場合のみ設定
+  const elements = {
+    openingtime: `OPEN ${openingtime}`,
+    showtime: `START ${showtime}`,
+    fullName: `${lastname} ${firstname}`,
+    birthDate: formatDate(birthdate),
+    managerNumber,
+    qrCode,
+  };
+
+  Object.entries(elements).forEach(([id, value]) => {
+    const element = document.getElementById(id);
+    if (element) {
+      if (id === "qrCode") {
+        element.src = value;
+      } else {
+        element.textContent = value;
+      }
+    }
+  });
+
+  const ticketElement = document.getElementById("ticket");
+  if (ticketElement) {
+    ticketElement.style.display = "block";
+  }
+};
+
+// ページロード時の初期化処理
 window.addEventListener("load", () => {
   updateTime();
   setInterval(updateTime, 1000);
+  populateTicketData();
 });
-
-window.onload = () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const openingtime = urlParams.get("openingtime");
-  const showtime = urlParams.get("showtime");
-  const lastname = urlParams.get("lastname");
-  const firstname = urlParams.get("firstname");
-  const birthdate = urlParams.get("birthdate");
-  const managerNumber = urlParams.get("managerNumber");
-  const qrCode = localStorage.getItem("qrCode");
-
-  document.getElementById("openingtime").textContent = `OPEN ${openingtime}`;
-  document.getElementById("showtime").textContent = `START ${showtime}`;
-  document.getElementById("fullName").textContent = `${lastname} ${firstname}`;
-  document.getElementById("birthDate").textContent = formatDate(birthdate);
-  document.getElementById("managerNumber").textContent = managerNumber;
-  if (qrCode) {
-    document.getElementById("qrCode").src = qrCode;
-  }
-
-  document.getElementById("ticket").style.display = "block";
-};
