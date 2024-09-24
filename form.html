@@ -3,76 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>フォーム</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-        font-size: 18px;
-      }
-
-      form {
-        max-width: 70%;
-        margin: auto;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        background-color: #f9f9f9;
-      }
-
-      label {
-        display: block;
-        margin: 10px 0 5px;
-        font-size: 18px;
-      }
-
-      input[type="text"],
-      input[type="date"],
-      input[type="time"],
-      input[type="file"],
-      input[type="submit"] {
-        width: 100%;
-        padding: 15px;
-        margin: 5px 0 15px;
-        box-sizing: border-box;
-        font-size: 18px;
-      }
-
-      input[type="submit"] {
-        background-color: #4caf50;
-        color: white;
-        border: none;
-        cursor: pointer;
-        font-size: 18px;
-      }
-
-      input[type="submit"]:hover {
-        background-color: #45a049;
-      }
-
-      @media (max-width: 600px) {
-        body {
-          margin: 10px;
-          font-size: 24px;
-        }
-
-        form {
-          padding: 10px;
-        }
-
-        input[type="text"],
-        input[type="date"],
-        input[type="time"],
-        input[type="file"],
-        input[type="submit"] {
-          padding: 25px;
-          font-size: 24px;
-        }
-
-        label {
-          font-size: 24px;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="form.css" />
   </head>
   <body>
     <form id="userForm">
@@ -99,59 +30,6 @@
       <br />
       <input type="submit" value="反映" />
     </form>
-    <script>
-      // ユーティリティ関数: ファイルをData URLとして読み込む
-      const readFileAsDataURL = (file) => {
-        return new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onload = () => resolve(reader.result);
-          reader.onerror = () => reject(reader.error);
-          reader.readAsDataURL(file);
-        });
-      };
-
-      // フォームの送信イベントリスナー
-      document.getElementById("userForm").addEventListener("submit", async (event) => {
-        event.preventDefault(); // デフォルトのフォーム送信を防止
-
-        try {
-          const form = event.target;
-
-          // フォームデータの取得
-          const { openingtime, showtime, lastname, firstname, birthdate, managerNumber, qrCode } = form.elements;
-
-          const qrCodeFile = qrCode.files[0];
-
-          if (!qrCodeFile) {
-            alert("QRコード画像を選択してください。");
-            return;
-          }
-
-          // QRコード画像をData URLとして読み込む
-          const qrCodeDataURL = await readFileAsDataURL(qrCodeFile);
-
-          // データをlocalStorageに保存
-          const formData = {
-            openingtime: openingtime.value,
-            showtime: showtime.value,
-            lastname: lastname.value,
-            firstname: firstname.value,
-            birthdate: birthdate.value,
-            managerNumber: managerNumber.value,
-            qrCode: qrCodeDataURL,
-          };
-
-          Object.entries(formData).forEach(([key, value]) => {
-            localStorage.setItem(key, value);
-          });
-
-          // 受信側ページに遷移
-          window.location.href = "ASOBI TICKET.html";
-        } catch (error) {
-          console.error("QRコード画像の読み込み中にエラーが発生しました:", error);
-          alert("QRコード画像の読み込み中にエラーが発生しました。再度お試しください。");
-        }
-      });
-    </script>
+    <script src="form.js"></script>
   </body>
 </html>
