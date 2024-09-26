@@ -441,7 +441,6 @@ var OneTrustStub = (function (t) {
             n)
           )
             for (var r in n) s.setRequestHeader(r, n[r]);
-          s.send();
         }
       }),
       (h.prototype.otFetchOfflineFile = function (t, e) {
