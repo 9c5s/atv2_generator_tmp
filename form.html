@@ -7,11 +7,26 @@
   </head>
   <body>
     <form id="userForm">
+      <label for="performanceDate">公演日</label>
+      <input type="date" id="performanceDate" name="performanceDate" required />
+      <br />
+      <label for="performanceName">公演名</label>
+      <input type="text" id="performanceName" name="performanceName" required />
+      <br />
+      <label for="venueAndType">会場名、公演種別</label>
+      <input type="text" id="venueAndType" name="venueAndType" required />
+      <br />
       <label for="openingtime">開場時間</label>
       <input type="time" id="openingtime" name="openingtime" required />
       <br />
       <label for="showtime">開演時間</label>
       <input type="time" id="showtime" name="showtime" required />
+      <br />
+      <label for="seatType">席種</label>
+      <input type="text" id="seatType" name="seatType" required />
+      <br />
+      <label for="ticketPrice">チケット金額</label>
+      <input type="number" id="ticketPrice" name="ticketPrice" min="0" required />
       <br />
       <label for="lastname">姓</label>
       <input type="text" id="lastname" name="lastname" required />

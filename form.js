@@ -13,25 +13,34 @@ document.getElementById("userForm").addEventListener("submit", async (event) => 
   event.preventDefault(); // デフォルトのフォーム送信を防止
 
   try {
-    const form = event.target;
-
-    // フォームデータの取得
-    const { openingtime, showtime, lastname, firstname, birthdate, managerNumber, qrCode } = form.elements;
-
-    const qrCodeFile = qrCode.files[0];
-
-    if (!qrCodeFile) {
-      alert("QRコード画像を選択してください。");
-      return;
-    }
+    // フォーム要素の取得
+    const {
+      performanceDate,
+      performanceName,
+      venueAndType,
+      openingtime,
+      showtime,
+      seatType,
+      ticketPrice,
+      lastname,
+      firstname,
+      birthdate,
+      managerNumber,
+      qrCode,
+    } = event.target.elements;
 
     // QRコード画像をData URLとして読み込む
-    const qrCodeDataURL = await readFileAsDataURL(qrCodeFile);
+    const qrCodeDataURL = await readFileAsDataURL(qrCode.files[0]);
 
-    // データをlocalStorageに保存
+    // 必要なすべてのフォームデータを取得
     const formData = {
+      performanceDate: performanceDate.value,
+      performanceName: performanceName.value,
+      venueAndType: venueAndType.value,
       openingtime: openingtime.value,
       showtime: showtime.value,
+      seatType: seatType.value,
+      ticketPrice: ticketPrice.value,
       lastname: lastname.value,
       firstname: firstname.value,
       birthdate: birthdate.value,
@@ -39,6 +48,7 @@ document.getElementById("userForm").addEventListener("submit", async (event) => 
       qrCode: qrCodeDataURL,
     };
 
+    // データをlocalStorageに保存
     Object.entries(formData).forEach(([key, value]) => {
       localStorage.setItem(key, value);
     });
@@ -46,7 +56,7 @@ document.getElementById("userForm").addEventListener("submit", async (event) => 
     // 受信側ページに遷移
     window.location.href = "ASOBI TICKET.html";
   } catch (error) {
-    console.error("QRコード画像の読み込み中にエラーが発生しました:", error);
-    alert("QRコード画像の読み込み中にエラーが発生しました。再度お試しください。");
+    console.error("エラーが発生しました:", error);
+    alert("フォームの送信中にエラーが発生しました。再度お試しください。");
   }
 });
