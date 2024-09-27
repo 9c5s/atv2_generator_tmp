@@ -2,21 +2,25 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>フォーム</title>
     <link rel="stylesheet" href="./form_files/form.css" />
   </head>
   <body>
     <form id="userForm">
-      <label for="performanceDate">公演日</label>
-      <input type="date" id="performanceDate" name="performanceDate" required />
-      <br />
-      <label for="performanceName">公演名</label>
-      <input type="text" id="performanceName" name="performanceName" required />
-      <br />
-      <label for="venueAndType">会場名、公演種別</label>
-      <input type="text" id="venueAndType" name="venueAndType" required />
-      <br />
-      <div class="time-container horizontal-container">
+      <div class="form-group">
+        <label for="performanceDate">公演日</label>
+        <input type="date" id="performanceDate" name="performanceDate" required />
+      </div>
+      <div class="form-group">
+        <label for="performanceName">公演名</label>
+        <input type="text" id="performanceName" name="performanceName" required />
+      </div>
+      <div class="form-group">
+        <label for="venueAndType">会場名、公演種別</label>
+        <input type="text" id="venueAndType" name="venueAndType" required />
+      </div>
+      <div class="form-group horizontal-container">
         <div>
           <label for="openingtime">開場時間</label>
           <input type="time" id="openingtime" name="openingtime" required />
@@ -26,14 +30,15 @@
           <input type="time" id="showtime" name="showtime" required />
         </div>
       </div>
-      <br />
-      <label for="seatType">席種</label>
-      <input type="text" id="seatType" name="seatType" required />
-      <br />
-      <label for="ticketPrice">チケット金額</label>
-      <input type="number" id="ticketPrice" name="ticketPrice" min="0" required />
-      <br />
-      <div class="name-container horizontal-container">
+      <div class="form-group">
+        <label for="seatType">席種</label>
+        <input type="text" id="seatType" name="seatType" required />
+      </div>
+      <div class="form-group">
+        <label for="ticketPrice">チケット金額</label>
+        <input type="number" id="ticketPrice" name="ticketPrice" min="0" required />
+      </div>
+      <div class="form-group horizontal-container">
         <div>
           <label for="lastname">姓</label>
           <input type="text" id="lastname" name="lastname" required />
@@ -43,20 +48,25 @@
           <input type="text" id="firstname" name="firstname" required />
         </div>
       </div>
-      <br />
-      <label for="birthdate">生年月日</label>
-      <input type="date" id="birthdate" name="birthdate" required />
-      <br />
-      <label for="managerNumber">管理番号</label>
-      <input type="text" id="managerNumber" name="managerNumber" required />
-      <br />
-      <label for="qrCode">QRコード画像</label>
-      <input type="file" id="qrCode" name="qrCode" accept="image/*" required />
-      <br />
-      <label>記入例</label>
-      <img src="./form_files/example.png" alt="記入例" class="image" />
-      <br />
-      <input type="submit" value="反映" />
+      <div class="form-group">
+        <label for="birthdate">生年月日</label>
+        <input type="date" id="birthdate" name="birthdate" required />
+      </div>
+      <div class="form-group">
+        <label for="managerNumber">管理番号</label>
+        <input type="text" id="managerNumber" name="managerNumber" required />
+      </div>
+      <div class="form-group">
+        <label for="qrCode">QRコード画像</label>
+        <input type="file" id="qrCode" name="qrCode" accept="image/*" required />
+      </div>
+      <div class="form-group">
+        <label>記入例</label>
+        <img src="./form_files/example.png" alt="記入例" class="image" />
+      </div>
+      <div class="form-group">
+        <input type="submit" value="反映" />
+      </div>
     </form>
     <script src="./form_files/form.js"></script>
   </body>
