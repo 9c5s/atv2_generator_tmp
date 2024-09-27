@@ -1,4 +1,9 @@
-// ユーティリティ関数: ファイルをData URLとして読み込む
+/**
+ * ファイルをData URLとして読み込む
+ *
+ * @param {File} file - 読み込むファイルオブジェクト
+ * @returns {Promise<string>} ファイルのData URLを返すPromise
+ */
 const readFileAsDataURL = (file) => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -8,9 +13,46 @@ const readFileAsDataURL = (file) => {
   });
 };
 
-// フォームの送信イベントリスナー
-document.getElementById("userForm").addEventListener("submit", async (event) => {
+/**
+ * 未入力のrequiredフィールドを検出してスクロールとフォーカスを行う
+ *
+ * @param {HTMLFormElement} form - バリデーションを行うフォーム要素
+ * @returns {boolean} バリデーションが成功した場合はtrue、失敗した場合はfalse
+ */
+const validateForm = (form) => {
+  const inputs = form.querySelectorAll("input, select, textarea");
+
+  let firstInvalid = null;
+  for (let input of inputs) {
+    if (!input.checkValidity()) {
+      firstInvalid = input;
+      break;
+    }
+  }
+
+  if (firstInvalid) {
+    firstInvalid.scrollIntoView({ behavior: "smooth", block: "center" });
+    firstInvalid.focus();
+    return false;
+  }
+
+  return true;
+};
+
+/**
+ * フォームの送信イベントハンドラー
+ *
+ * フォーム送信時にバリデーションを実行し、必要な処理を行います。
+ *
+ * @param {Event} event - フォーム送信時のイベントオブジェクト
+ */
+const handleFormSubmit = async (event) => {
   event.preventDefault(); // デフォルトのフォーム送信を防止
+
+  const form = event.target;
+
+  // バリデーションに失敗した場合は処理を中断
+  if (!validateForm(form)) return;
 
   try {
     // フォーム要素の取得
@@ -27,7 +69,7 @@ document.getElementById("userForm").addEventListener("submit", async (event) => 
       birthdate,
       managerNumber,
       qrCode,
-    } = event.target.elements;
+    } = form.elements;
 
     // QRコード画像をData URLとして読み込む
     const qrCodeDataURL = await readFileAsDataURL(qrCode.files[0]);
@@ -59,4 +101,7 @@ document.getElementById("userForm").addEventListener("submit", async (event) => 
     console.error("エラーが発生しました:", error);
     alert("フォームの送信中にエラーが発生しました。再度お試しください。");
   }
-});
+};
+
+// フォームの送信イベントリスナーを登録
+document.getElementById("userForm").addEventListener("submit", handleFormSubmit);
