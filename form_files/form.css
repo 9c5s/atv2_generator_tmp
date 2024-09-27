@@ -53,6 +53,28 @@ input[type="submit"]:hover {
   height: auto;
 }
 
+.horizontal-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.horizontal-container div {
+  width: 50%;
+  padding-right: 20px;
+}
+
+.horizontal-container div:last-child {
+  padding-right: 0;
+}
+
+.name-container {
+  composes: horizontal-container;
+}
+
+.time-container {
+  composes: horizontal-container;
+}
+
 @media (max-width: 600px) {
   body {
     margin: 10px;
@@ -74,5 +96,14 @@ input[type="submit"]:hover {
 
   label {
     font-size: 24px;
+  }
+
+  .horizontal-container {
+    flex-direction: column;
+  }
+
+  .horizontal-container div {
+    width: 100%;
+    padding-right: 0;
   }
 }

@@ -16,11 +16,16 @@
       <label for="venueAndType">会場名、公演種別</label>
       <input type="text" id="venueAndType" name="venueAndType" required />
       <br />
-      <label for="openingtime">開場時間</label>
-      <input type="time" id="openingtime" name="openingtime" required />
-      <br />
-      <label for="showtime">開演時間</label>
-      <input type="time" id="showtime" name="showtime" required />
+      <div class="time-container horizontal-container">
+        <div>
+          <label for="openingtime">開場時間</label>
+          <input type="time" id="openingtime" name="openingtime" required />
+        </div>
+        <div>
+          <label for="showtime">開演時間</label>
+          <input type="time" id="showtime" name="showtime" required />
+        </div>
+      </div>
       <br />
       <label for="seatType">席種</label>
       <input type="text" id="seatType" name="seatType" required />
@@ -28,11 +33,16 @@
       <label for="ticketPrice">チケット金額</label>
       <input type="number" id="ticketPrice" name="ticketPrice" min="0" required />
       <br />
-      <label for="lastname">姓</label>
-      <input type="text" id="lastname" name="lastname" required />
-      <br />
-      <label for="firstname">名</label>
-      <input type="text" id="firstname" name="firstname" required />
+      <div class="name-container horizontal-container">
+        <div>
+          <label for="lastname">姓</label>
+          <input type="text" id="lastname" name="lastname" required />
+        </div>
+        <div>
+          <label for="firstname">名</label>
+          <input type="text" id="firstname" name="firstname" required />
+        </div>
+      </div>
       <br />
       <label for="birthdate">生年月日</label>
       <input type="date" id="birthdate" name="birthdate" required />
