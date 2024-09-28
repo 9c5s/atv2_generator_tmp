@@ -14,32 +14,6 @@ const readFileAsDataURL = (file) => {
 };
 
 /**
- * 未入力のrequiredフィールドを検出してスクロールとフォーカスを行う
- *
- * @param {HTMLFormElement} form - バリデーションを行うフォーム要素
- * @returns {boolean} バリデーションが成功した場合はtrue、失敗した場合はfalse
- */
-const validateForm = (form) => {
-  const inputs = form.querySelectorAll("input, select, textarea");
-
-  let firstInvalid = null;
-  for (let input of inputs) {
-    if (!input.checkValidity()) {
-      firstInvalid = input;
-      break;
-    }
-  }
-
-  if (firstInvalid) {
-    firstInvalid.scrollIntoView({ behavior: "smooth", block: "center" });
-    firstInvalid.focus();
-    return false;
-  }
-
-  return true;
-};
-
-/**
  * フォームの送信イベントハンドラー
  *
  * フォーム送信時にバリデーションを実行し、必要な処理を行います。
@@ -48,11 +22,6 @@ const validateForm = (form) => {
  */
 const handleFormSubmit = async (event) => {
   event.preventDefault(); // デフォルトのフォーム送信を防止
-
-  const form = event.target;
-
-  // バリデーションに失敗した場合は処理を中断
-  if (!validateForm(form)) return;
 
   try {
     // フォーム要素の取得
@@ -69,7 +38,7 @@ const handleFormSubmit = async (event) => {
       birthdate,
       managerNumber,
       qrCode,
-    } = form.elements;
+    } = event.target.elements;
 
     // QRコード画像をData URLとして読み込む
     const qrCodeDataURL = await readFileAsDataURL(qrCode.files[0]);
