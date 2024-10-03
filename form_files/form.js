@@ -36,6 +36,7 @@ const handleFormSubmit = async (event) => {
       lastname,
       firstname,
       birthdate,
+      entrance,
       managerNumber,
       qrCode,
     } = event.target.elements;
@@ -55,6 +56,7 @@ const handleFormSubmit = async (event) => {
       lastname: lastname.value,
       firstname: firstname.value,
       birthdate: birthdate.value,
+      entrance: entrance.value,
       managerNumber: managerNumber.value,
       qrCode: qrCodeDataURL,
     };

@@ -86,6 +86,7 @@ const populateTicketData = () => {
     lastname,
     firstname,
     birthdate,
+    entrance,
     managerNumber,
     qrCode,
   } = localStorage;
@@ -105,6 +106,7 @@ const populateTicketData = () => {
     ticketPrice: formatCurrency(ticketPrice),
     fullName: `${lastname} ${firstname}`,
     birthDate: formatBirthdate(birthdate),
+    entrance,
     managerNumber,
     qrCode,
   };
