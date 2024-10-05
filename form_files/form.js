@@ -83,4 +83,6 @@ const handleFormSubmit = async (event) => {
 };
 
 // フォームの送信イベントリスナーを登録
-document.getElementById("userForm").addEventListener("submit", handleFormSubmit);
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("userForm").addEventListener("submit", handleFormSubmit);
+});
