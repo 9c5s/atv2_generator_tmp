@@ -1,4 +1,12 @@
 /**
+ * 認証情報のチェック
+ * ユーザーが認証されていない場合、ログインページにリダイレクトする
+ */
+if (sessionStorage.getItem("authenticated") !== "true") {
+  window.location.href = "index.html";
+}
+
+/**
  * ファイルをData URLとして読み込む
  *
  * @param {File} file - 読み込むファイルオブジェクト
