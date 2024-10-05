@@ -34,10 +34,12 @@ const getHash = async (password) => {
  */
 const authenticate = async () => {
   try {
-    const password = document.getElementById("password")?.value.trim();
+    const passwordInput = document.getElementById("password");
+    const password = passwordInput?.value.trim();
 
     if (!password) {
       alert("パスワードを入力してください。");
+      passwordInput.focus();
       return;
     }
 
@@ -50,6 +52,8 @@ const authenticate = async () => {
       window.location.href = "form.html";
     } else {
       alert("パスワードが間違っています");
+      passwordInput.value = "";
+      passwordInput.focus();
     }
   } catch (error) {
     console.error("Authentication error:", error);
@@ -58,4 +62,13 @@ const authenticate = async () => {
 };
 
 // イベントハンドラ登録
-document.getElementById("loginButton")?.addEventListener("click", authenticate);
+document.addEventListener("DOMContentLoaded", () => {
+  const loginForm = document.getElementById("loginForm");
+
+  if (loginForm) {
+    loginForm.addEventListener("submit", async (event) => {
+      event.preventDefault(); // フォームのデフォルト送信を防ぐ
+      await authenticate();
+    });
+  }
+});
