@@ -3,19 +3,23 @@
   "version": "1.0.0",
   "description": "Optimized static site for GitHub Pages with obfuscation and minification",
   "scripts": {
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "start": "webpack serve --mode development"
   },
   "devDependencies": {
+    "@babel/core": "^7.25.8",
+    "@babel/preset-env": "^7.25.8",
     "babel-loader": "^9.2.1",
+    "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^7.1.2",
-    "css-minimizer-webpack-plugin": "^7.0.0",
     "file-loader": "^6.2.0",
+    "html-loader": "^5.1.0",
     "html-webpack-plugin": "^5.6.0",
-    "javascript-obfuscator": "^4.1.1",
+    "mini-css-extract-plugin": "^2.9.1",
     "style-loader": "^4.0.0",
-    "terser-webpack-plugin": "^5.3.10",
+    "url-loader": "^4.1.1",
     "webpack": "^5.95.0",
     "webpack-cli": "^5.1.4",
-    "webpack-obfuscator": "^3.5.1"
+    "webpack-dev-server": "^5.1.0"
   }
 }
