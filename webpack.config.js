@@ -22,6 +22,7 @@ module.exports = {
     filename: "scripts/[name]_[contenthash].js",
     path: path.resolve(__dirname, "dist"),
     assetModuleFilename: "assets/[hash][ext][query]",
+    clean: true,
   },
   module: {
     rules: [
@@ -41,7 +42,30 @@ module.exports = {
       },
       {
         test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                plugins: [
+                  [
+                    "cssnano",
+                    {
+                      preset: [
+                        "default",
+                        {
+                          discardComments: { removeAll: true },
+                        },
+                      ],
+                    },
+                  ],
+                ],
+              },
+            },
+          },
+        ],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
@@ -78,6 +102,8 @@ module.exports = {
     splitChunks: {
       chunks: "all",
     },
+    minimize: true,
+    minimizer: [`...`],
   },
   devServer: {
     static: {
@@ -88,4 +114,5 @@ module.exports = {
     open: true,
   },
   mode: "production",
+  // devtool: "source-map",
 };
