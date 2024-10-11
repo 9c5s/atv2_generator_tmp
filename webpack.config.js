@@ -10,6 +10,7 @@ module.exports = {
     filename: "js/bundle.js",
     path: path.resolve(__dirname, "dist"),
     clean: true, // ビルド前にdistディレクトリをクリーン
+    publicPath: "", // 必要に応じて設定
   },
   module: {
     rules: [
@@ -36,13 +37,6 @@ module.exports = {
   optimization: {
     minimize: true,
     minimizer: [
-      new JavaScriptObfuscator({
-        rotateStringArray: true,
-        stringArray: true,
-        stringArrayEncoding: ["base64"],
-        stringArrayThreshold: 1,
-        // その他の難読化オプションを追加可能
-      }),
       new TerserPlugin({
         terserOptions: {
           compress: true,
@@ -69,6 +63,16 @@ module.exports = {
       filename: "ASOBI_TICKET.html",
       chunks: ["main"],
     }),
-    // 必要に応じて他の HTML ファイルも追加
+    // JavaScript を難読化するプラグイン
+    new JavaScriptObfuscator(
+      {
+        rotateStringArray: true,
+        stringArray: true,
+        stringArrayEncoding: ["base64"],
+        stringArrayThreshold: 1,
+        // その他の難読化オプションをここに追加
+      },
+      ["bundle.js"]
+    ), // 対象ファイルを指定
   ],
 };
