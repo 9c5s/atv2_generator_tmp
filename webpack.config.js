@@ -1,6 +1,6 @@
 const path = require("path");
 const TerserPlugin = require("terser-webpack-plugin");
-const JavaScriptObfuscator = require("javascript-obfuscator");
+const WebpackObfuscator = require("webpack-obfuscator"); // 正しいプラグインをインポート
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
@@ -63,8 +63,7 @@ module.exports = {
       filename: "ASOBI_TICKET.html",
       chunks: ["main"],
     }),
-    // JavaScript を難読化するプラグイン
-    new JavaScriptObfuscator(
+    new WebpackObfuscator(
       {
         rotateStringArray: true,
         stringArray: true,
@@ -72,7 +71,7 @@ module.exports = {
         stringArrayThreshold: 1,
         // その他の難読化オプションをここに追加
       },
-      ["bundle.js"]
+      ["js/bundle.js"]
     ), // 対象ファイルを指定
   ],
 };
