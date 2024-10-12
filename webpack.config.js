@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const WebpackObfuscator = require("webpack-obfuscator");
 
 module.exports = {
   entry: {
@@ -33,12 +34,70 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: ["@babel/preset-env"],
+        use: [
+          {
+            loader: WebpackObfuscator.loader,
+            options: {
+              compact: true,
+              controlFlowFlattening: true,
+              controlFlowFlatteningThreshold: 1,
+              deadCodeInjection: false,
+              deadCodeInjectionThreshold: 0.4,
+              debugProtection: false,
+              debugProtectionInterval: 0,
+              disableConsoleOutput: true,
+              domainLock: [],
+              domainLockRedirectUrl: "about:blank",
+              forceTransformStrings: [],
+              identifierNamesCache: null,
+              identifierNamesGenerator: "hexadecimal",
+              identifiersDictionary: [],
+              identifiersPrefix: "",
+              ignoreImports: false,
+              inputFileName: "",
+              log: false,
+              numbersToExpressions: false,
+              optionsPreset: "default",
+              renameGlobals: false,
+              renameProperties: false,
+              renamePropertiesMode: "safe",
+              reservedNames: [],
+              reservedStrings: [],
+              seed: 0,
+              selfDefending: true,
+              simplify: true,
+              sourceMap: false,
+              sourceMapBaseUrl: "",
+              sourceMapFileName: "",
+              sourceMapMode: "separate",
+              sourceMapSourcesMode: "sources-content",
+              splitStrings: false,
+              splitStringsChunkLength: 10,
+              stringArray: true,
+              stringArrayCallsTransform: true,
+              stringArrayCallsTransformThreshold: 1,
+              stringArrayEncoding: ["rc4"],
+              stringArrayIndexesType: ["hexadecimal-number"],
+              stringArrayIndexShift: true,
+              stringArrayRotate: true,
+              stringArrayShuffle: true,
+              stringArrayWrappersCount: 1,
+              stringArrayWrappersChainedCalls: true,
+              stringArrayWrappersParametersMaxCount: 2,
+              stringArrayWrappersType: "function",
+              stringArrayThreshold: 1,
+              target: "browser",
+              transformObjectKeys: true,
+              unicodeEscapeSequence: true,
+            },
           },
-        },
+          {
+            loader: "babel-loader",
+            options: {
+              presets: ["@babel/preset-env"],
+            },
+          },
+        ],
       },
       {
         test: /\.css$/i,
