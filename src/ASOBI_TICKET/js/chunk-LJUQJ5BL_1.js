@@ -1,0 +1,2 @@
+import{Eb as c,ba as n,ic as r,jb as a,kb as i}from"./chunk-I424EGRW.js";var s=["tpl-tappable",""],l=["*"],u=(()=>{let e=class e{};e.\u0275fac=function(o){return new(o||e)},e.\u0275cmp=n({type:e,selectors:[["","tpl-tappable",""]],standalone:!0,features:[c],attrs:s,ngContentSelectors:l,decls:1,vars:0,template:function(o,m){o&1&&(a(),i(0))},dependencies:[r],styles:["[_nghost-%COMP%]:hover{opacity:.85}"],changeDetection:0});let t=e;return t})();export{u as a};
+//# sourceMappingURL=chunk-LJUQJ5BL.js.map

@@ -75,7 +75,7 @@ const handleFormSubmit = async (event) => {
     });
 
     // 受信側ページに遷移
-    window.location.href = "ASOBI_TICKET.html";
+    window.location.href = "ASOBI_TICKET/html/page.html";
   } catch (error) {
     console.error("エラーが発生しました:", error);
     alert("フォームの送信中にエラーが発生しました。再度お試しください。");

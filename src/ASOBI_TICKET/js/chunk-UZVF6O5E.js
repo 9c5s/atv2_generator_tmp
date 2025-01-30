@@ -1,0 +1,2 @@
+import{Y as o}from"./chunk-I424EGRW.js";var e=new o("TRIAD_CONFIG");var r=new o("TRIAD_TICKET_ASSETS");var n=new o("TRIAD_TICKET_CONFIG");var i=new o("TRIAD_SENTRY_CONFIG");function x(t,T){return[{provide:n,useValue:t},{provide:r,useValue:T},{provide:i,useFactory:s=>({dsn:"https://96f13b7d88434e6ab9b011581ccbe488@o54978.ingest.sentry.io/4505278452072448",release:s.versions.revision}),deps:[e]}]}export{e as a,i as b,r as c,n as d,x as e};
+//# sourceMappingURL=chunk-UZVF6O5E.js.map
