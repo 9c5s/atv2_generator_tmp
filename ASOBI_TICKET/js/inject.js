@@ -119,7 +119,7 @@ const populateTicketData = () => {
   });
 
   // 一時対応
-  //document.querySelector("#entrance").parentElement.style.display = "none";
+  document.querySelector("#entrance").parentElement.style.display = "none";
 
   document.getElementById("ticket").style.display = "block";
 };
